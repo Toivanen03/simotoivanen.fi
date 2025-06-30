@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@media screen and (min-width: 1024px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 2vw;
+    }
+
+    h3 {
+        margin-left: 2vw;
+        margin-top: 1vh;
+        margin-bottom: 5vh;
+        font-size: larger;
+    }
+
+    .raja {
+        padding: 8px;
+        border: 3px dotted lightgray;
+    }
+
+    .koko {
+        font-size: 24px;
+    }
+
+    .koko-pienempi {
+        font-size: 18px;
+    }
+}

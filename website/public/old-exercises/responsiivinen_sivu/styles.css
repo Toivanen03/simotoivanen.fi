@@ -1,0 +1,140 @@
+    body {
+        background-color: rgba(243, 238, 238, 0.932);
+        background-size: cover;
+    }      
+    h1 {
+        text-align: left;
+        text-decoration: underline;
+        text-decoration-style: double;
+        margin-left: 10%;
+        align-items: baseline;
+        color: rgb(0, 0, 0);
+        font-size: 35px;
+    }
+    h2 {
+        text-decoration: none;
+        align-items: baseline;
+        margin-left:25px;
+        color: rgb(0, 0, 0);
+        font-size: 27px;
+    }
+    h3 {
+        text-decoration: underline;
+        align-items: baseline;
+        margin-left:45px;
+        color: rgb(0, 0, 0);
+        font-size: 24px;
+    }
+    h4 {
+        text-decoration: none;
+        align-items: baseline;
+        margin-left:65px;
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+    }
+    p {
+        margin-left:30px;
+    }
+    ul {
+        margin:20px;
+    }
+    a:link {
+        font-family: Arial, Helvetica, sans-serif; font-style: initial; font-size: 18px; color: rgb(28, 8, 211);
+    }
+    a:visited {
+        font-family: Arial, Helvetica, sans-serif; font-style: initial; font-size: 18px; color: rgb(196, 4, 4);
+    }
+    th {
+        vertical-align: top;
+        text-align: left;
+        font-size: 20px;
+        padding-left: 50px;
+        padding-bottom: 20px;
+    }
+    td {
+        vertical-align: bottom;
+        text-align: left;
+        padding-left: 50px;
+    }
+    .palkki {
+        margin: auto;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+    #topright {
+        position: relative;
+    }
+    .github {
+        position: absolute;
+        top: 2%;
+        right: 2%;
+    }
+@media screen and (max-width: 600px) {
+    img {
+        max-width: 50%;
+        height: auto;
+    }
+    .desktop-menu {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+    h1 {
+        text-align: left;
+        text-decoration: underline;
+        margin-left: 3%;
+        color: rgb(0, 0, 0);
+        font-size: 24px;
+    }
+    h2 {
+        margin-left:4%;
+        color: rgb(0, 0, 0);
+        font-size: 22px;
+    }
+    h3 {
+        margin-left:5%;
+        color: rgb(0, 0, 0);
+        font-size: 19px;
+    }
+    h4 {
+        margin-left:6%;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+    }
+    #topright {
+        position: relative;
+        }
+    .github {
+        position: absolute;
+        top: 12%;
+        right: 0px;
+    }
+    th {
+        vertical-align: bottom;
+        text-align: left;
+        font-size: 14px;
+        padding-left: 10px;
+        padding-bottom: 0px;
+    }
+    td {
+        vertical-align: bottom;
+        text-align: left;
+        font-size: 12px;
+        padding-left: 10px;
+    }
+    ul {
+        padding-left: 0px;
+    }
+    li {
+        width: 100%;
+        padding-left: 1px;
+    }
+}
+@media (min-width: 601px) {
+    .mobile-menu {
+        display: none;
+    }
+}

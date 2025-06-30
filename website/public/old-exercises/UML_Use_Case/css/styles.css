@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@media screen and (min-width: 1024px) {
+
+/*          TIEDOSTOSSA SIVUN RUNGON, HEADERIN, FOOTERIN JA PAINIKKEIDEN MUOTOILUT   (KÄSITTELE VAROEN)       */
+
+    /*     SIVUN PÄÄMUOTOILUT     */
+
+
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: 'Poppins', 'sans-serif';
+        background-color: white;
+        color: var(--teksti);
+    }
+
+    main {
+        flex-grow: 1;
+        padding: 0;
+    }
+
+
+
+    /*     HEADER & FOOTER     */
+
+    header {
+        padding: 0;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .contact_info img {
+        width: 36px;
+        margin-right: 15px;
+    }
+
+
+
+    /*     PAINIKKEET     */
+
+    .frontPageButton {
+        width: 10vw;
+    }
+
+    .btn-primary {
+        background-color: #333333;
+        border-color: var(--teksti);
+    }
+
+    .btn-primary:hover {
+        background-color: gray;
+        border-color: white;
+    }
+
+    .btn-primary:active {
+        background-color: #333333 !important;
+    }
+
+    .btn-secondary {
+        background-color: gray;
+    }
+
+    .btn-secondary:hover {
+        background-color: #333333;
+    }
+
+
+
+    /*     VALIKOT JA LINKIT     */
+
+    .link {
+        background-color: white;
+    }
+
+    .link img {
+        width: 40px;
+    }
+
+    .link:hover {
+        background-color: var(--tausta);
+    }
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@media screen and (max-width: 1023px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 2vw;
+    }
+
+    .btn {
+        margin-bottom: 2vh;
+    }
+
+    .varjo {
+        box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tulos {
+        background-color: white;
+        width: 100%;
+        height: auto;
+        text-align: center;
+        border: 2px dotted lightgray;
+        height: 18vh;
+    }
+
+    #FtoC {
+        margin-bottom: 4vh;
+    }
+
+    .lampotilasyote {
+        width: 90%;
+        min-height: 6vh;
+        font-size: small;
+        text-align: center;
+    }
+
+    .desimaali {
+        font-size: large;
+        background-color: white;
+        border-style: solid;
+        border-color: gray;
+        border-width: 3px;
+    }
+}      

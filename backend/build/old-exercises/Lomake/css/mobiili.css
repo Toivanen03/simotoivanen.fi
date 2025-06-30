@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@media screen and (max-width: 1023px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 1vw;
+        margin-bottom: 5vh;
+    }
+
+    h3 {
+        font-size: large;
+    }
+
+    .lomake {
+        background-color: white;
+        max-width: 100%;
+        height: auto;
+        align-content: left;
+        border-style: outset;
+        border-width: 4px;
+        border-color: var(--vaalea);
+        padding: 5px;
+    }
+
+    .lomakeBoksi {
+        margin-bottom: 10vh;
+    }
+
+    .container {
+        margin-top: -5vh;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    p {
+        font-size: small;
+    }
+
+    textarea {
+        width: 51vw;
+        margin-bottom: 8px;
+        margin-left: 4vw;
+    }
+
+    input {
+        width: 40vw;
+        align-content: center;
+        margin-left: 15vw;
+    }
+
+    .fontti {
+        display: none;
+    }
+
+    .mobiilifontti {
+        font-size: small;
+    }
+
+    .marginaali {
+        margin-left: 8vw;
+        margin-right: -14vw;
+    }
+
+    .maa {
+        font-size: small;
+        margin-left: 15vw;
+    }
+
+    .radiobuttons {
+        margin-left: 6vw;
+    }
+}      

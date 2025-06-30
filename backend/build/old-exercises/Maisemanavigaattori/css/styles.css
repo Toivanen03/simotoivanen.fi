@@ -1,0 +1,766 @@
+:root {
+    --blue: #00356e;
+    
+}
+
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Days One", sans-serif;
+    overflow: hidden;
+}
+
+#map-container {
+    position: relative;
+    height: calc(100vh - 50px);
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+}
+
+#map {
+    flex: 1;
+    height: 100%;
+    cursor: default;
+}
+
+#markerMessage {
+    width: auto;
+    position: fixed;
+    pointer-events: none;
+    background: rgba(169, 169, 169, 0.7);
+    color: white;
+    padding: 15px;
+    border: 2px solid #3c3c3c;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    display: none;
+    font-size: 0.9em;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.menu {
+    position: absolute;
+    height: 100vh;
+    width: 60px;
+    z-index: 1004;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: width 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    cursor: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.menu img{
+    width: 30px;
+}
+
+.menu div {
+    width: 60px;
+    height: 60px;
+    color: white;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    white-space: nowrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    cursor: pointer;
+}
+
+.menu div:hover {
+    background-color: rgba(159, 155, 155, 0.2);
+}
+
+.leaflet-bottom{
+    position: absolute;
+    bottom: 60px;
+    width: 200px;
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+#loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+.loading-border {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 0 20px rgba(0, 0, 0, 0.2),
+                0 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.loading-border video {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    opacity: 0.75;
+}
+
+.search {
+    max-width: 100%;
+    position: absolute; 
+    top: 40%;
+    left: 90px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+    cursor: auto;
+    font-family: "Days One", sans-serif;
+    animation: slideInFromLeft 0.5s forwards ease-out;
+}
+
+.search:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.search div {
+    margin-bottom: 15px;
+}
+
+.search-top {
+    color: white;
+    position: relative;
+    height: auto;
+}
+
+
+#removeRoutes {
+    margin-right: -15px;
+    margin-top: -20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+button{
+    display: block;
+    padding: 10px 15px;
+    margin: 0 auto;
+    background-color: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#routeDistance {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.maisema-selection {
+    text-align: center;
+    cursor: pointer;
+}
+
+.panel {
+    position: relative;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    background-color:black;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.39);
+    z-index: 1008;
+    display: flex;
+    font-weight: bold;
+    font-family: "Days One", sans-serif;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#username-display {
+    font-size: x-small;
+}
+
+.leaflet-top {
+    position: absolute;
+    top: 10px !important;
+    right: 7px !important;
+}
+.leaflet-control {
+    position: absolute;
+    top: 10px !important;
+    right: 7px !important;
+}
+
+.switch {
+    position: relative;
+    display: block;
+    width: 60px;
+    height: 30px;
+    margin: 0 auto;
+   
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 30px;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: var(--blue);
+
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+}
+
+
+
+.video-container {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: auto;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+.video-container video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    opacity: 0.4;
+}
+
+.overlay-text {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    z-index: 2;
+    width: 100%;
+}
+
+.loading-text {
+    padding: 20px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    z-index: 2;
+    width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+@keyframes dots {
+    0% { content:   ""; }
+    20% { content:  "."; }
+    40% { content:  ".."; }
+    60% { content:  "..."; }
+    80% { content:  "...."; }
+    100% { content: "....."; }
+}
+
+.loading-text::after {
+    position: absolute;
+    content: "";
+    margin-left: 5px;
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+#removeRoutes{
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    font-size: xx-small;
+}
+
+#removeRoutes:hover{
+    cursor: pointer;
+}
+
+.hide {
+    display: none !important;
+}
+
+#login-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 10px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 100%;
+    height: 400px;
+    z-index: 1999;
+    font-family: "Days One", sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#login-form input {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#startMenu {
+    display: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 8999;
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    border: solid 3px darkgray;
+    border-radius: 20px;
+    pointer-events: auto;
+}
+
+#startMenu.hidden {
+    pointer-events: none;
+}
+
+#dataFiles {
+    display: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    border: solid 3px darkgray;
+    border-radius: 20px;
+    pointer-events: auto;
+}
+
+#dataFiles.hidden {
+    pointer-events: none;
+}
+
+#mode-box {
+    display: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    width: 300px;
+    height: auto;
+    padding: 20px;
+    border: solid 3px darkgray;
+    border-radius: 20px;
+    pointer-events: auto;;
+}
+
+#mode-box.hidden {
+    pointer-events: none;
+}
+
+#settings-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 10px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    min-height: 400px;
+    z-index: 1999;
+    font-family: "Days One", sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#settings-menu ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #settings-menu ul li {
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  #settings-menu ul li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    border-bottom: 2px solid rgb(209, 207, 207);
+  }
+  
+#settings-menu ul li:hover {
+    background-color: #f0f0f0;
+}
+
+
+.locationQueryBox {                         /* Sijaintilupalaatikko */
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 40%;
+    height: auto;
+    background-color: white;
+    border: solid 5px darkgray;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    z-index: 9999;
+}
+
+.locationQueryBox .btn {
+    width: 60px;
+    font-weight: 600;
+}
+
+.permissionDeniedBox {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    width: 40%;
+    height: auto;
+    background-color: white;
+    border: solid 5px darkgray;
+    border-radius: 20px;
+    padding: 10px;
+    text-align: center;
+    z-index: 99999;
+}
+
+.permissionDeniedBox .btn {
+    font-weight: 600;
+}
+
+.cookie-banner {                        /* Evästeilmoitus*/
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2C2C2C;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 99999;
+    font-family: Arial, sans-serif;
+    display: none;
+}
+
+.cookie-banner p {
+    margin: 0;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.cookie-banner a {
+    color: #23b6ff;
+    text-decoration: underline;
+}
+
+.cookie-banner button {
+    background-color: #2391ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cookie-banner button:hover {
+    background-color: #ff8500;
+}
+
+.flash {
+    animation: flash 0.1s ease-in-out 3;
+}
+
+@keyframes flash {
+    0%, 100% {
+        background-color: #d3d3d3e1;
+    }
+    50% {
+        background-color: rgb(100, 98, 98);
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+@media (max-width: 700px) {
+    
+    .menu {
+        position: fixed;
+        bottom: 0;
+        width: 100vw;
+        height: 60px;
+        padding: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    nav {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .video-container {
+        max-width: 100%;
+        height: 50vh;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .overlay-text {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .video-container video {
+        display: none;
+    }
+
+    .search {
+        position: absolute;
+        left: 36px;
+        width: 300px;
+        max-width: 90%;
+        top: 50px;
+        transform: translateX(-50%);
+        animation: slideInFromBottom 0.5s forwards ease-out;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        z-index: 2000;
+    }
+
+    .search-top{
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    #removeRoutes{
+        margin-right: 5px;
+        padding-top: 5px;
+    }
+
+    #username-display{
+        position:static;
+    }
+
+    .leaflet-bottom{
+        position: static;
+        left: 10px;
+    }
+    
+    .leaflet-top {
+        position: absolute;
+        top: 0px;
+    }
+    #login-form{
+        top: 250px;
+        z-index: 2001;
+    }
+
+    #settings-menu{
+        width:250px;
+        top: 250px;
+        font-size: smaller;
+    }
+    
+
+    @keyframes slideInFromBottom {
+        0% {
+            transform: translateY(200px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+
+
+@media (min-width: 701px) and (max-width: 1500px) {
+  
+  
+    .info-box{
+        top: 200px;
+        width: 95%;
+        height: 75vh;
+    }
+    #login-form{
+        width: 250px;
+        height: 300px;
+        top: 200px;
+    }
+
+    .video-container {
+        top: 50px;
+    }
+    
+    .overlay-text {
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .search{
+        top:20%;
+        width: 250px;
+        height: auto;
+    }
+    #settings-menu{
+        width:250px;
+        top: 250px;
+        font-size: smaller;
+    }
+    
+
+ 
+
+    
+}

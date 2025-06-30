@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lomakkeen validointi</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="robots" content="noindex, nofollow">
+    <link href="/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 1023px)" href="css/mobiili.css">
+</head>
+
+<body>
+<main>
+    <h2 style="margin-bottom: 60px;">Lomakkeen validointi</h2>
+    <div class="container lomakeBoksi">
+        <form name="lomake" class="lomake varjo">
+        <h3>Olet palauttanut seuraavat tiedot:</h3><br>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Tunnus:</p>
+            </div>
+            <div class="col-6">    
+                <p id="userName" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Salasana:</p>
+            </div>
+            <div class="col-6">    
+                <p style="font-style: italic;">Piilotettu tietoturvasyistä</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Nimi:</p>
+            </div>
+            <div class="col-6">    
+                <p id="name" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Osoite:</p>
+            </div>
+            <div class="col-6">    
+                <p id="address" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Maa:</p>
+            </div>
+            <div class="col-6">    
+                <p id="country" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Postinumero:</p>
+            </div>
+            <div class="col-6">    
+                <p id="zipCode" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Sähköposti:</p>
+            </div>
+            <div class="col-6">    
+                <p id="email" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Sukupuoli:</p>
+            </div>
+            <div class="col-6">    
+                <p id="gender" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Kielet:</p>
+            </div>
+            <div class="col-6">    
+                <p id="language" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <p>Viestisi:</p>
+            </div>
+            <div class="col-6">    
+                <p id="message" style="font-style: italic;"></p>
+            </div>
+        </div>
+
+            <script src="vahvistus.js"></script>
+            
+        </form>
+    </div>
+</main> 
+</body>
+</html>

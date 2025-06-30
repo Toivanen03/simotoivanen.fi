@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <link rel="canonical" href="https://simotoivanen.fi/old-exercises/Lampotilamuunnin/lampotilamuunnin.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lämpötilamuunnin</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="description" content="Simo Toivanen - Lämpötilamuunnin">
+    <meta property="og:title" content="Lämpötilamuunnin Javascriptillä">
+    <meta property="og:description" content="Lämpötilamuunnin °C -> °F -> °C">
+    <meta property="og:image" content="/img/simo.jpg">
+    <meta property="og:url" content="https://simotoivanen.fi/old-exercises/Lampotilamuunnin/lampotilamuunnin.html">
+    <link href="/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 1023px)" href="css/mobiili.css">
+</head>
+
+<body>
+<main>
+    <h2>Lämpötilamuunnin</h2>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md mb-6">
+                <input type="text" class="lampotilasyote" id="alkuLampo" placeholder="Anna lämpötila asteina (C) tai (F):" style="text-align: center;">
+                <br><br>
+                <button type="button" id="CtoF" class="btn btn-secondary"><b>Celsius -> Fahrenheit</b></button>
+                <button type="button" id="FtoC" class="btn btn-secondary"><b>Fahrenheit -> Celsius</b></button>
+
+                <script src="TempConv.js"></script>
+            </div>
+
+            <div class="col-md mb-3 desimaali">
+                <h3>Tuloksen tarkkuus:</h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="YksiDesi" checked>
+                    <label class="form-check-label" for="YksiDesi">
+                        Yksi (1) desimaali
+                    </label>
+                </div>
+                <div class="form-check">            
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="KaksiDesi">
+                    <label class="form-check-label" for="KaksiDesi">
+                        Kaksi (2) desimaalia
+                    </label>
+                </div>
+                <div class="form-check">            
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="KolmeDesi">
+                    <label class="form-check-label" for="KolmeDesi">
+                        Kolme (3) desimaalia
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md mb-3">
+                <div id="Tulos" class="tulos">
+                    <h3>Lämpötila:</h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>  
+</body>
+</html>

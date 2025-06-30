@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@media screen and (min-width: 1024px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 2vw;
+    }
+
+    .lomake {
+        background-color: white;
+        max-width: 100%;
+        height: auto;
+        align-content: center;
+        border-style: outset;
+        border-width: 8px;
+        border-color: var(--tausta);
+        padding: 20px;
+    }
+    
+    .lomakeBoksi {
+        width: 50vw;
+        margin-bottom: 15vh;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    textarea {
+        width: 20vw;
+        margin-bottom: 20px;
+        margin-left: 2vw;
+    }
+
+    input {
+        width: 20vw;
+        align-content: center;
+        margin-left: 2vw;
+    }
+
+    .fontti {
+        font-size: 14px;
+        color: darkgray;
+        font-style: italic;
+    }
+
+    .marginaali {
+        margin-right: -8vw;
+    }
+
+    .maa {
+        margin-left: 2vw;
+    }
+}      

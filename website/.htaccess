@@ -1,0 +1,25 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+Redirect 301 /esittely.html https://simotoivanen.fi
+Redirect 301 /JavaScript-harjoitukset/Pong/pong.html https://simotoivanen.fi/old-exercises/Pong/pong.html
+Redirect 301 /tyokokemus.html https://simotoivanen.fi
+Redirect 301 /pelit.html https://simotoivanen.fi/games
+Redirect 301 /referenssit.html https://simotoivanen.fi
+Redirect 301 /hirsipuu.html https://simotoivanen.fi/old-exercises/hirsipuu.html
+Redirect 301 /JavaScript-harjoitukset/matopeli/index.html https://simotoivanen.fi/old-exercises/matopeli/index.html
+Redirect 301 /JavaScript-harjoitukset/Clicker/clicker.html https://simotoivanen.fi/old-exercises/Clicker/clicker.html
+Redirect 301 /responsiivinen_sivu_bootstrapilla/kriteerit.html https://simotoivanen.fi/old-exercises/responsiivinen_sivu/index.html
+Redirect 301 /JavaScript-harjoitukset/Lomake/lomake.html https://simotoivanen.fi/old-exercises/Lomake/lomake.html
+Redirect 301 /responsiivinen_sivu/tutkinnonosat.html https://simotoivanen.fi/old-exercises/responsiivinen_sivu/index.html
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+RewriteCond %{HTTP_HOST} ^www\.simotoivanen\.fi [NC]
+RewriteRule ^(.*)$ https://simotoivanen.fi/$1 [L,R=301]
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [L]

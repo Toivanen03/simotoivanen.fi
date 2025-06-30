@@ -1,0 +1,63 @@
+<!DOCTYPE html>             <!-- TÄMÄ KARTTA ON VAIN TESTAUSKÄYTTÖÖN EIKÄ KUULU LOPULLISEEN OHJELMAAN -->
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testikartta</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        let data = localStorage.getItem("Polygon");
+        let coordinatesList = [];
+        let coordinates = [];
+
+        coordinatesList.push(...JSON.parse(data));
+
+        function flipCoordinates(coords) {
+            return coords.map(coord => {
+                const [lng, lat] = coord;
+                return [lat, lng];
+            });
+        }
+        for (let i = 0; i < coordinatesList.length; i++) {
+            coordinates.push(flipCoordinates(coordinatesList[i]));
+        }
+
+        console.log('TÄMÄ KARTTA ON VAIN TESTAUSKÄYTTÖÖN EIKÄ KUULU LOPULLISEEN OHJELMAAN');
+        console.log(checkWindingOrder(coordinates));
+        console.log(coordinates);
+        
+        var map = L.map('map').setView([61.21, 26.04], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+        var polyline = L.polyline(coordinates, {color: 'blue'}).addTo(map);
+        map.fitBounds(polyline.getBounds());
+
+        function checkWindingOrder(coords) {
+            let area = 0;
+            for (let i = 0; i < coords.length - 1; i++) {
+                area += coords[i][0] * coords[i + 1][1];
+                area -= coords[i + 1][0] * coords[i][1];
+            }
+
+            area += coords[coords.length - 1][0] * coords[0][1];
+            area -= coords[0][0] * coords[coords.length - 1][1];
+            
+            return area > 0 ? "Clockwise" : "Counter-clockwise";
+        }
+    </script>
+
+</body>
+</html>

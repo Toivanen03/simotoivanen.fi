@@ -1,0 +1,26 @@
+@media screen and (max-width: 1023px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    .program {
+        display: none;
+    }
+    
+    .message {
+        width: 80%;
+        margin: 5vh auto;
+        border: 3px solid darkgray;
+        border-radius: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        height: 10vh;
+    }
+
+    .message p {
+        margin-top: 1vh;
+    }
+    
+}
