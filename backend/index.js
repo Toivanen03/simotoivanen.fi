@@ -12,7 +12,6 @@ import User from './models/User.js'
 import Blog from './models/Blog.js'
 import { passwordResetRoutes } from './routes/passwordReset.js'
 import { blogNotificationRouter } from './routes/blogNotification.js'
-import { helperRouter } from './routes/helperRouter.js'
 import { sitemapRouter } from './routes/sitemap.js'
 
 async function checkForNewContent(lastCheck) {
@@ -32,7 +31,6 @@ app.use(express.json())
 app.use('/', sitemapRouter)
 app.use('/api', passwordResetRoutes)
 app.use('/api', blogNotificationRouter)
-app.use('/api', helperRouter)
 app.use(express.static(join(__dirname, 'build')))
 
 app.use((req, res, next) => {

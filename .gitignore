@@ -12,7 +12,7 @@ dist
 dist-ssr
 *.local
 build-with-config.mjs
-config-script-js
+config-script.js
 .env
 dist
 sftp.json
