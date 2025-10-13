@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 import { Node, JS, TS, HTML, CSS, Docker, Python, Bootstrap, React } from '../assets/svg/Logos'
 import { useEffect } from 'react'
 
-const Home = () => {
+const Home = ({ isMobile }) => {
   const { loading, error, data, refetch } = useQuery(LATEST_BLOGS)
   const testUsernamePart1 = "test"
   const testUsernamePart2 = "simotoivanen"
@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="homeBg">
       <div className='home-main'>
-        <div className="container mt-4 lead-container glow">
+        <div className={isMobile ? "container mt-4 lead-container glow" : "container mt-4 lead-container glow p-5"}>
           <div className='row'>
             <div className="col-12">
               <h1 className="text-center text-md-start">Tervehdys!</h1>
@@ -40,14 +40,25 @@ const Home = () => {
                   analyyttistä ajattelukykyäni, ongelmanratkaisutaitojani ja <strong>jatkuvaa haluani oppia uutta!</strong>
                 </em>
               </span>
-              <div className='row'>
-                <div className="col-3">
-                  <ModalButton action="info" label="Faktoja minusta" />
+              {!isMobile ? (
+                <div className='row'>
+                  <div className="col-4">
+                    <ModalButton action="info" label="Faktoja minusta" isMobile />
+                  </div>
+                  <div className="col-4">
+                    <ModalButton action="cv" label='Lataa CV' isMobile />
+                  </div>
                 </div>
-                <div className="col-3">
-                  <ModalButton action="cv" label='Lataa CV' />
+              ) : (
+                <div className='row'>
+                  <div className="col-6">
+                    <ModalButton action="info" label="Minusta" isMobile />
+                  </div>
+                  <div className="col-6">
+                    <ModalButton action="cv" label='Lataa CV' isMobile />
+                  </div>
                 </div>
-              </div>
+                )}
             </div>
 
             <div className="col-md-4 mt-4 mb-3 d-flex justify-content-center">
@@ -63,7 +74,7 @@ const Home = () => {
           <div className='row d-flex mt-5 mx-auto' style={{ maxWidth: '95%' }}>
             <p>Tämänhetkistä osaamistasoani kuvastaa vanhojen harjoitustöiden sijasta todennäköisimmin <a href="/aboutpage">tämä sivusto</a> sekä <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -projekti.</p>
             <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin kirjautumalla sisään testitunnuksilla.<br/><br />
-              - Käyttäjätunnus on <b>{testUsernamePart1 + testUsernameOtherParts[0] + testUsernamePart2 + testUsernameOtherParts[1]}</b><br />
+              - Käyttäjätunnus on <b aria-hidden="true">{testUsernamePart1 + testUsernameOtherParts[0] + testUsernamePart2 + testUsernameOtherParts[1]}</b><br />
               - Salasana on <b>salasana</b> isolla alkukirjaimella, a-kirjaimet korvattuna numerolla 4, ja lopuksi huutomerkki.<br /><br />
               Testitunnuksilla pääset kirjautumaan sivustolle admin-käyttäjänä ja tutustumaan hallintapaneeliin.
               Sivuston suojaamiseksi varsinaiset tietokantamutaatiot on estetty.</p>

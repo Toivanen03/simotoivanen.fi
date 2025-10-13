@@ -1,8 +1,9 @@
 import { Modal } from 'bootstrap'
 import cv from '../files/CV_Simo_Toivanen.pdf'
 
-function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled = false }) {
+function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled = false, isMobile }) {
   const buttonType = action.startsWith('del') ? 'btn-danger' : 'btn-primary'
+  const buttonWidth = isMobile ? '30vw' : '10vw'
 
   const handleClick = () => {
     if (disabled) return
@@ -41,7 +42,7 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
 
   if (action === 'cv') {
     return (
-      <a className="btn btn-primary mt-3 mx-2" href={cv} download style={{width: '10vw'}}>
+      <a className="btn btn-primary mt-3 mx-2" href={cv} download style={{width: buttonWidth}}>
         {label}
       </a>
     )
@@ -53,7 +54,7 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
       className={`btn mt-3 mx-2 ${buttonType}`}
       onClick={handleClick}
       disabled={disabled}
-      style={{width: '10vw'}}
+      style={{width: buttonWidth}}
     >
       {label}
     </button>

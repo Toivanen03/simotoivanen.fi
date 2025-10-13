@@ -129,7 +129,7 @@ function App() {
           )}
             <main className="main-content">
               <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home isMobile={isMobile} />} />
                 <Route path="/exercises" element={<RequireAuth><Exercises /></RequireAuth>} />
                 <Route path="/admin" element={<RequireAdmin><Admin setConfirmTitle={setConfirmTitle} setOnConfirm={setOnConfirm} isMobile={isMobile} /></RequireAdmin>} />
                 <Route path="/games" element={<Games />} />
