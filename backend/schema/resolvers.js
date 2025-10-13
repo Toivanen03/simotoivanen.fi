@@ -14,7 +14,7 @@ const requireAuth = (user) => {
 
 const requireAdmin = (user) => {
   requireAuth(user)
-  if (user.username === 'test@simotoivanen.fi' || user.id === "68539d8c80fde2cd9d4cb465") {
+  if (user.username === 'test@simotoivanen.fi' || user.id === "68ecdd9525778d45ea771a33") {
     throw new Error("Toiminto ei ole käytettävissä testitunnuksilla.")
   } else if (!user.admin) {
     throw new Error("Ei valtuuksia!")
@@ -23,7 +23,7 @@ const requireAdmin = (user) => {
 
 const requireTestAdmin = (user) => {
   requireAuth(user)
-  if (user.username === 'test@simotoivanen.fi' || user.id === "68539d8c80fde2cd9d4cb465") {
+  if (user.username === 'test@simotoivanen.fi' || user.id === "68ecdd9525778d45ea771a33") {
     return
   }
 }
