@@ -121,7 +121,7 @@ const AdminContentMobile = ({
                                 </div>
 
                                 <div className='me-3' style={{ width: '200px' }}>
-                                    {blog.subtitle.split(' ')[0] + '...'}
+                                    {blog.subtitle?.split(' ')[0] + '...'}
                                 </div>
 
                                 <div className='me-3 d-flex justify-content-center align-items-center' style={{ width: '70px', height: '100%' }}>
