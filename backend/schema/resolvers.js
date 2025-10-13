@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken'
 import User from '../models/User.js'
 import Message from '../models/Message.js'
 import Blog from '../models/Blog.js'
-import Log from '../models/Log.js'
 import MailSender from '../utils/mailer.js'
 import { createUserSchema, validateContact } from './userValidation.js'
 import { GraphQLError } from 'graphql'
@@ -31,10 +30,6 @@ const requireTestAdmin = (user) => {
 
 const resolvers = {
   Query: {
-    logs: async () => {
-      return await Log.find({})
-    },
-
     me: async (_root, _args, context) => {
       return context.currentUser || null
     },
@@ -72,22 +67,6 @@ const resolvers = {
   },
 
   Mutation: {
-    clearLogs: async (_root, _args, context) => {
-      requireAdmin(context.currentUser)
-      const result = await Log.deleteMany({})
-      return { deletedCount: result.deletedCount }
-    },
-
-    sendLog: async (_root, args) => {
-      const logContent = args.content
-      const log = new Log ({
-        content: logContent,
-        createdAt: new Date()
-      })
-
-      return await log.save()
-    },
-
     newBlog: async (root, args, context) => {
       requireAdmin(context.currentUser)
       const blogTitle = args.title

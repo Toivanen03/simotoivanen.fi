@@ -7,10 +7,8 @@
     "dev": "npm-run-all --parallel mobile backend-dev",
     "website-dev": "cd website && npm run dev",
     "backend-dev": "cd backend && npm run dev",
-    "backend-helper": "cd helper && npm run dev",
     "website-mobile-dev": "cd website && npm run mobile-dev -- --host",
     "mobile": "cross-env npm run website-mobile-dev",
-    "helper": "cross-env npm-run-all --parallel dev backend-helper",
     "build": "cd website && npm run deploy"
   },
   "dependencies": {

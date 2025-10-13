@@ -14,15 +14,6 @@ export const ADD_USER = gql`
     }
 `
 
-export const LOGS = gql`
-    query logs {
-        logs {
-            content
-            createdAt
-        }
-    }
-`
-
 export const ME = gql`
     query Me {
         me {
@@ -100,14 +91,6 @@ export const DELETE_BLOG = gql`
 export const DELETE_MANY = gql`
     mutation DeleteMany($blogIds: [ID!]!) {
         deleteMany(blogIds: $blogIds) {
-            deletedCount
-        }
-    }
-`
-
-export const CLEAR_LOGS = gql`
-    mutation clearLogs {
-        clearLogs {
             deletedCount
         }
     }

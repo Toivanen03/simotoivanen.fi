@@ -23,7 +23,7 @@ export const validateContact = z.object({
   message: z.string()
     .min(5, '\n- Kirjoita viesti')
     .max(1000, '\n- Liian pitkä viesti')
-    .refine(val => val.trim().split(/\s+/).length >= 5, {
-      message: '\n- Liian lyhyt viesti, kirjoita vähintään viisi sanaa.'
+    .refine(val => val.trim().split(/\s+/).length >= 3, {
+      message: '\n- Liian lyhyt viesti, kirjoita vähintään kolme sanaa.'
     })
 })

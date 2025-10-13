@@ -1,11 +1,6 @@
 import { gql } from "apollo-server-express"
 
 const typeDefs = gql`
-  type Log {
-    content: String!
-    createdAt: String!
-  }
-
   type User {
     id: ID!
     username: String!
@@ -25,7 +20,6 @@ const typeDefs = gql`
     getBlog(id: ID!): Blog
     blogs: [Blog!]!
     latestBlogs: [Blog!]!
-    logs: [Log]
   }
 
   type Token {
@@ -68,8 +62,6 @@ const typeDefs = gql`
     deleteBlog(id: ID!): Blog
     updateBlog(id: ID!, title: String!, subtitle: String, content: String!): Blog
     deleteMany(blogIds: [ID!]!): DeleteResult
-    sendLog(content: String!): Log
-    clearLogs: DeleteResult
   }
 `
 

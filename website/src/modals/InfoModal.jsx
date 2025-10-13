@@ -1,11 +1,6 @@
 import ModalButton from "./ModalButton"
-import { Modal } from "bootstrap"
-import { AuthContext } from "../contexts/AuthContext"
-import { useContext } from "react"
-import { newUser } from "../middleware/newUser"
 
 const InfoModal = () => {
-  const { isLoggedIn } = useContext(AuthContext)
 
   return (
     <div className="modal custom-modal-animate" id="InfoModal" aria-labelledby="InfoModalLabel">
@@ -22,19 +17,6 @@ const InfoModal = () => {
               <li>Luottamusmieskoulutus, Metalliliitto (2012)</li>
               <li>Henkilöautomekaanikon ammattitutkinto (näyttötutkinto, Kainuun ammattiopisto KAO, valm. 2011)</li>
             </ul>
-              {!isLoggedIn && (<p>
-                Voit ladata CV:ni <a href="#" onClick={(e) => {
-                  e.preventDefault()
-                  const loginModalEl = document.getElementById('LoginModal')
-                  if (loginModalEl) {
-                    const loginModal = Modal.getInstance(loginModalEl) || new Modal(loginModalEl)
-                    loginModal.show()
-                  }
-                }}>kirjauduttuasi sisään</a>. Voit luoda tunnukset <a href="#" onClick={(e) => {
-                  e.preventDefault()
-                  newUser()
-                }}>tästä</a>.</p>
-                )}
 
               <h5 className="modal-title mt-4">Työkokemukseni</h5>
                 <ul className="mt-3">
@@ -42,7 +24,7 @@ const InfoModal = () => {
                   <li><b>Yrittäjä</b> <i>Puhelinhuoltamo.com</i>, Heinola <b>2013-2016</b></li>
                   <li>Sekalaisia työsuhteita eri paikkakunnilla <b>1996-2005</b></li>
                 </ul>
-              {isLoggedIn && <ModalButton action={'cv'} label='Lataa CV' />}
+              <ModalButton action={'cv'} label='Lataa CV' />
               <ModalButton action={'close'} label='Sulje' />
           </div>
         </div>

@@ -1,21 +1,13 @@
 import UserModal from '../modals/UserModal'
 import { FaTrash, FaLock, FaLink } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
 const AdminContent = ({
-    loading, error, logData, logLoading, logError, blogData, blogLoading, blogError,
+    loading, error, blogData, blogLoading, blogError,
     selectedUser, toggleAdminStatus, deleteUserFunction, deleteBlogFunction, userModal,
-    selectBlogs, editBlog, handleDeleteMany, HandleClearLogs, adminCount, usersState,
+    selectBlogs, editBlog, handleDeleteMany, adminCount, usersState,
     selectedBlogs, blogsToDelete, currentUser
 }) => {
-
-    const [showCount, setShowCount] = useState(10)
-
-    const logsToShow = logData?.logs
-        ?.slice()
-        .sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
-        .slice(0, showCount)
 
     return (
         <div className="container">
@@ -212,68 +204,6 @@ const AdminContent = ({
                     >
                     <small>Poista valitut blogit</small>
                     </button>
-                </div>
-            </div>
-
-            <div className='mt-5' style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-                <h2>Backend-lokit</h2>
-                <span>(24h)</span>
-            </div>
-            <div className="row justify-content-center">
-                <div className='col-md-8 mt-2 mb-4 add-user-column' style={{padding: '40px'}}>
-                    {logLoading && <p>Ladataan lokeja...</p>}
-                    {logError && <p>Virhe lokien haussa</p>}
-                    {logsToShow?.map((log, index) => (
-                    <div className="row" key={index}>
-                        <div className='col-2'>
-                            {(logData.logs.length - index) + '.'}
-                        </div>
-                        <div className="col-5">
-                            <div className='row'>
-                            Pvm: {new Date(Number(log.createdAt)).toLocaleDateString('fi-FI')}
-                            </div>
-                            <div className='row'>
-                            Klo: {new Date(Number(log.createdAt)).toLocaleTimeString('fi-FI')}
-                            </div>
-                            <br />
-                        </div>
-                        <div className="col-5">
-                            <p>{log.content}</p>
-                        </div>
-                    </div>
-                ))}
-                </div>
-                <div className="row mb-4 d-flex justify-content-center">
-                    <div className='col-auto'>
-                        {logData?.logs?.length > 10 && (
-                        <button
-                            onClick={() => setShowCount(showCount === 10 ? 100 : 10)}
-                            className="btn btn-primary"
-                        >
-                            {showCount === 10 ? 'Näytä 100' : 'Näytä 10'}
-                        </button>
-                        )}
-                    </div>
-                    <div className='col-auto'>
-                        {showCount === 100 && (
-                        <button
-                            onClick={() => setShowCount(Infinity)}
-                            className="btn btn-primary"
-                        >
-                            Näytä kaikki
-                        </button>
-                        )}
-                    </div>
-                    <div className='col-auto'>
-                        <button
-                            type="button"
-                            className="btn btn-danger"
-                            disabled={logData?.logs?.length === 0}
-                            onClick={HandleClearLogs}
-                        >
-                        <small>Tyhjennä lokitiedot</small>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

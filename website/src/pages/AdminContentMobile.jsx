@@ -1,21 +1,13 @@
 import UserModal from '../modals/UserModal'
 import { FaTrash, FaLock, FaLink } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
 
 const AdminContentMobile = ({
-    loading, error, logData, logLoading, logError, blogData, blogLoading, blogError,
+    loading, error, blogData, blogLoading, blogError,
     selectedUser, toggleAdminStatus, deleteUserFunction, deleteBlogFunction, userModal,
-    selectBlogs, editBlog, handleDeleteMany, HandleClearLogs, adminCount, usersState,
+    selectBlogs, editBlog, handleDeleteMany, adminCount, usersState,
     selectedBlogs, blogsToDelete, currentUser
 }) => {
-
-    const [showCount, setShowCount] = useState(10)
-
-    const logsToShow = logData?.logs
-        ?.slice()
-        .sort((a, b) => Number(b.createdAt) - Number(a.createdAt))
-        .slice(0, showCount)
     
     return (
     <div className="container" style={{ minWidth: '100%'}}>
@@ -182,63 +174,6 @@ const AdminContentMobile = ({
                             onClick={() => handleDeleteMany()}>
                                 Poista valitut blogit
                         </button>
-                    </div>
-                </div>
-
-                <div className='mt-5' style={{ whiteSpace: 'nowrap', display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-                    <h2>Backend-lokit</h2>
-                    <span>(24h)</span>
-                </div>
-                    <div className="row justify-content-center mb-5">
-                        <div className='col-12 mt-4'>
-                            {logLoading && <p>Ladataan lokeja...</p>}
-                            {logError && <p>Virhe lokien haussa</p>}
-                            {logsToShow?.map((log, index) => (
-                            <div className="d-flex align-items-center border-bottom py-1" key={index}>
-                                <div className='me-3' style={{ width: '50px' }}>
-                                    {(logData.logs.length - index) + '.'}
-                                </div>
-                                <div className='me-3' style={{ width: '180px' }}>
-                                    <div>Pvm: {new Date(Number(log.createdAt)).toLocaleDateString('fi-FI')}</div>
-                                    <div>Klo: {new Date(Number(log.createdAt)).toLocaleTimeString('fi-FI')}</div>
-                                </div>
-                                <div className='me-3' style={{ flex: 1 }}>
-                                    <p className='mb-0'>{log.content}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="row mb-4 mt-4 d-flex justify-content-center align-items-center">
-                        <div className='col-4'>
-                            {logData?.logs?.length > 10 && (
-                            <button
-                                onClick={() => setShowCount(showCount === 10 ? 100 : 10)}
-                                className="btn btn-primary"
-                            >
-                                {showCount === 10 ? 'Näytä 100' : 'Näytä 10'}
-                            </button>
-                            )}
-                        </div>
-                        <div className='col-4'>
-                            {showCount === 100 && (
-                            <button
-                                onClick={() => setShowCount(Infinity)}
-                                className="btn btn-primary"
-                            >
-                                Näytä kaikki
-                            </button>
-                            )}
-                        </div>
-                        <div className='col-4'>
-                            <button
-                                type="button"
-                                className="btn btn-danger"
-                                disabled={logData?.logs?.length === 0}
-                                onClick={HandleClearLogs}
-                            >
-                            <small>Tyhjennä lokit</small>
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import { useState, useEffect, useContext } from 'react'
-import { DELETE_USER, USERS, UPDATE_USER, BLOGS, DELETE_BLOG, DELETE_MANY, LOGS, CLEAR_LOGS } from '../../schema/queries'
+import { DELETE_USER, USERS, UPDATE_USER, BLOGS, DELETE_BLOG, DELETE_MANY } from '../../schema/queries'
 import { AuthContext } from '../contexts/AuthContext'
 import errorHandler from '../middleware/errorHandler'
 import { Modal } from 'bootstrap'
@@ -15,13 +15,6 @@ const Admin = ({ setConfirmTitle, setOnConfirm, isMobile }) => {
     const [selectedUser, setSelectedUser] = useState(null)
     const [blogsToDelete, setBlogsToDelete] = useState([])
     const [selectedBlogs, setSelectedBlogs] = useState([])
-
-    const { data: logData, loading: logLoading, error: logError } = useQuery(LOGS, {
-        pollInterval: 30000,
-        onError: (error) => {
-            errorHandler(setConfirmTitle, error)
-        },
-    })
 
     const { data, loading, error, refetch } = useQuery(USERS, {
         onError: (error) => {
@@ -176,25 +169,6 @@ const Admin = ({ setConfirmTitle, setOnConfirm, isMobile }) => {
         refetchQueries: [{ query: BLOGS }]
     })
 
-    const HandleClearLogs = async () => {
-        setConfirmTitle(`Haluatko poistaa kaikki lokitiedot?`)
-        setOnConfirm(() => () => {
-            clearLogs()
-        })
-    }
-
-    const [clearLogs] = useMutation(CLEAR_LOGS, {
-        onError: (error) => {
-            errorHandler(setConfirmTitle, error)
-        },
-        onCompleted: (data) => {
-            const returnValue = ['LogsRemoved', data.clearLogs.deletedCount]
-            setConfirmTitle(returnValue)
-            setOnConfirm(() => () => {})
-        },
-        refetchQueries: [{ query: LOGS }]
-    })
-
     const adminCount = usersState.filter(u => u.admin).length
 
     return (
@@ -202,23 +176,21 @@ const Admin = ({ setConfirmTitle, setOnConfirm, isMobile }) => {
         {!isMobile ?
         (<AdminContent
             adminCount={adminCount} usersState={usersState} loading={loading} error={error}
-            logData={logData} logLoading={logLoading} logError={logError}
             blogData={blogData} blogLoading={blogLoading} blogError={blogError}
             selectedUser={selectedUser} toggleAdminStatus={toggleAdminStatus}
             deleteUserFunction={deleteUserFunction} deleteBlogFunction={deleteBlogFunction}
             userModal={userModal} selectBlogs={selectBlogs} editBlog={editBlog}
-            handleDeleteMany={handleDeleteMany} HandleClearLogs={HandleClearLogs}
-            selectedBlogs={selectedBlogs} blogsToDelete={blogsToDelete} currentUser={currentUser}
+            handleDeleteMany={handleDeleteMany} selectedBlogs={selectedBlogs}
+            blogsToDelete={blogsToDelete} currentUser={currentUser}
         />
         ) : (<AdminContentMobile
             adminCount={adminCount} usersState={usersState} loading={loading} error={error}
-            logData={logData} logLoading={logLoading} logError={logError}
             blogData={blogData} blogLoading={blogLoading} blogError={blogError}
             selectedUser={selectedUser} toggleAdminStatus={toggleAdminStatus}
             deleteUserFunction={deleteUserFunction} deleteBlogFunction={deleteBlogFunction}
             userModal={userModal} selectBlogs={selectBlogs} editBlog={editBlog}
-            handleDeleteMany={handleDeleteMany} HandleClearLogs={HandleClearLogs}
-            selectedBlogs={selectedBlogs} blogsToDelete={blogsToDelete} currentUser={currentUser}
+            handleDeleteMany={handleDeleteMany} selectedBlogs={selectedBlogs}
+            blogsToDelete={blogsToDelete} currentUser={currentUser}
         />
         )}
         </>

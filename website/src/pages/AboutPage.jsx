@@ -481,126 +481,6 @@ const server = new ApolloServer({
 
 .....
 `} />
-                            <p>
-                                Backend pyörii <strong>Render Web Servicenä.</strong> Koska palvelu on Renderin ilmaispalvelussa, on idle-tila estetty 
-                                toisella Renderissä pyörivällä web servicellä. Käytännössä avustava palvelu pingaa backendiä satunnaisin väliajoin, ja vastavuoroisesti
-                                backendin vastaus pitää avustajan hereillä.
-                            </p>
-<Example header={'"Helper":'} code={`
-import axios from 'axios'
-import dotenv from 'dotenv'
-import Log from './models/Log.js'
-import express from 'express'
-import { ApolloServer } from 'apollo-server-express'
-import mongoose from 'mongoose'
-import typeDefs from './schema/typeDefs.js'
-import resolvers from './schema/resolvers.js'
-
-dotenv.config()
-
-const REQ_ID = process.env.REQ_ID
-const RES_URL = process.env.RES_URL
-const PORT = process.env.PORT
-const MONGO_URI = process.env.MONGODB_URI
-
-const app = express()
-
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    cache: "bounded"
-})
-
-app.use(express.json())
-
-let helperTimeout = null
-
-app.post('/api/logs', async (req, res) => {
-  await Log.deleteMany({ createdAt: { $lt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000) } })
-
-  let logContent = 'HELPER:'
-
-  const isBackend = req.get('RES-ID') === process.env.RES_ID
-  
-  if (!isBackend) {
-    logContent += '\nVäärä tai puuttuva RES-ID'
-    await saveLog(logContent)
-    return res.status(403).end()
-  }
-
-  logContent += '\nVastaus backendiltä.'
-
-  if (helperTimeout) {
-    clearTimeout(helperTimeout)
-  }
-
-  const delay = getRandomDelay()
-  logContent += \`\\n$\{createDelayLog(delay)}\`
-  await saveLog(logContent)
-
-  helperTimeout = setTimeout(backendHelper, delay)
-
-  return res.status(201).json({ message: 'Yhteys vastaanotettu ja viive nollattu' })
-})
-
-async function backendHelper() {
-  let logContent = 'HELPER:'
-
-  try {
-    const response = await axios.get(RES_URL, {
-      headers: { 'REQ-ID': REQ_ID }
-    })
-
-    if (response.data.status === 'ok') {
-      logContent += '\nVastaus backendiltä OK'
-    } else {
-      logContent += \`\\nPalvelin vastasi virheellisesti: $\{response.data.status}\`
-    }
-  } catch (err) {
-    logContent += \`\\nVirhe: $\{err.message}\`
-  }
-
-  const delay = getRandomDelay()
-  logContent += \`\\n$\{createDelayLog(delay)}\`
-
-  await saveLog(logContent)
-
-  helperTimeout = setTimeout(backendHelper, delay)
-}
-
-function createDelayLog(delay) {
-  return \`\Uusi viive: $\{((delay / 1000) / 60).toFixed(2)} minuuttia\`
-}
-
-function getRandomDelay(minMinutes = 3, maxMinutes = 9) {
-  const min = minMinutes * 60 * 1000
-  const max = maxMinutes * 60 * 1000
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-async function saveLog(content) {
-  try {
-    const log = new Log({ content })
-    await log.save()
-  } catch (err) {
-    console.error(\`\Lokitus epäonnistui: $\{err.message}\`)
-  }
-}
-
-await server.start()
-server.applyMiddleware({ app, path: '/graphql' })
-
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log(\`\MongoDB connected\`)
-    app.listen(PORT, () => {
-      console.log(\`\Server running on port $\{PORT}\`)
-    })
-  })
-  .catch(err => console.error(err))
-
-backendHelper()
-`} />
 
                             <h4 className="mb-4 mt-5">Navigointi ja käyttöoikeudet</h4>
                             <p>
@@ -734,7 +614,7 @@ export default MailSender
                             
                                 <p><strong>Mobiilisovellus:</strong> Käyttäjien hallinta sekä sivun sisällön päivitykset keskitetysti. (vain admin)</p>
                             </section>
-                            <p>Sivusto on aktiivisesti kehityksen alla.</p>
+                            <p>Sivustoa päivitetään satunnaisesti. Pääpaino kehitystyössäni on nyt <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -sovelluksessani.</p>
                         </div>
                     </div>
                 </div>
