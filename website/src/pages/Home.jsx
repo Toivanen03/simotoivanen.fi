@@ -203,7 +203,7 @@ const Home = ({ isMobile }) => {
           </div>
         </div>
       </div>
-      <InfoModal />
+      <InfoModal isMobile />
     </div>
   )
 }

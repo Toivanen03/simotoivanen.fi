@@ -1,6 +1,6 @@
 import ModalButton from "./ModalButton"
 
-const InfoModal = () => {
+const InfoModal = (isMobile) => {
 
   return (
     <div className="modal custom-modal-animate" id="InfoModal" aria-labelledby="InfoModalLabel">
@@ -24,8 +24,8 @@ const InfoModal = () => {
                   <li><b>Yrittäjä</b> <i>Puhelinhuoltamo.com</i>, Heinola <b>2013-2016</b></li>
                   <li>Sekalaisia työsuhteita eri paikkakunnilla <b>1996-2005</b></li>
                 </ul>
-              <ModalButton action={'cv'} label='Lataa CV' />
-              <ModalButton action={'close'} label='Sulje' />
+              <ModalButton action={'cv'} label='Lataa CV' isMobile />
+              <ModalButton action={'close'} label='Sulje' isMobile />
           </div>
         </div>
       </div>
