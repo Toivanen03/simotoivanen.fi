@@ -1,6 +1,6 @@
 import ModalButton from "./ModalButton"
 
-const InfoModal = (isMobile) => {
+const InfoModal = ({ isMobile }) => {
 
   return (
     <div className="modal custom-modal-animate" id="InfoModal" aria-labelledby="InfoModalLabel">
