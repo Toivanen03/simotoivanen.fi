@@ -146,7 +146,7 @@ const AdminContent = ({
                                     {blog.title}
                                 </div>
                                 <div className='col-3'>
-                                    {blog.subtitle.split(' ')[0] + '...'}
+                                    {blog.subtitle?.split(' ')[0] + '...'}
                                 </div>
                                 <div className='col-1'>
                                     <Link to={`/blog/${blog.id}`}>
