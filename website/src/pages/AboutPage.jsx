@@ -33,9 +33,9 @@ const AboutPage = ({ isMobile }) => {
                             <section className="container my-5">
                             <h2 className="mb-4">Sivuston tekninen esittely</h2>
                             <p>
-                                Tämä sivusto on rakennettu moderneilla JavaScript-tekniikoilla. Sivun frontend on toteutettu <strong>Reactilla </strong> käyttäen
-                                <strong> React Routeria</strong> reititykseen, <strong>Bootstrapia</strong> tyylittelyyn ja <strong>Viteä </strong>
-                                kehitysympäristönä sekä ympäristömuuttujien hallintaan.
+                                <strong>Simotoivanen.fi</strong> on rakennettu moderneilla JavaScript-tekniikoilla. Sivun frontend on toteutettu <strong>React</strong>illa käyttäen
+                                <strong> React Router</strong>ia reititykseen, <strong>Bootstrap</strong>ia tyylittelyyn ja <strong>Vite</strong>ä
+                                kehitysympäristönä sekä ympäristömuuttujien hallintaan. Sivuston data tallentuu <strong>MongoDb</strong>-tietokantaan, josta <strong>Raspberry Pi Zero</strong>lla pyörivä backend hakee mm. blogit ja käyttäjätiedot.
                             </p>
 
                             <hr className="my-4" />
@@ -454,7 +454,7 @@ export default LoginModal
                             <h4 className="mb-4 mt-5">Backend-yhteys</h4>
                             <p>
                                 Sivusto kommunikoi <strong>Node.js/Express</strong>-pohjaiseen backend-palvelimeen <strong>GraphQL</strong>-rajapinnan kautta. 
-                                <strong> Apollo Client</strong> toimii tietojen hakemisen ja päivittämisen välittäjänä.
+                                <strong> Apollo Client</strong> toimii tietojen hakemisen ja päivittämisen välittäjänä. Sivuston backend pyörii omalla Raspberry Pi Zero -palvelimellani.
                             </p>
 <Example header={'index.js'} code={`
 .....

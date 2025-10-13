@@ -9,7 +9,9 @@ import { useEffect } from 'react'
 
 const Home = () => {
   const { loading, error, data, refetch } = useQuery(LATEST_BLOGS)
-
+  const testUsernamePart1 = "test"
+  const testUsernamePart2 = "simotoivanen"
+  const testUsernameOtherParts = ["@", ".fi"]
   useEffect(() => {
     refetch()
   }, [])
@@ -38,9 +40,13 @@ const Home = () => {
                   analyyttistä ajattelukykyäni, ongelmanratkaisutaitojani ja <strong>jatkuvaa haluani oppia uutta!</strong>
                 </em>
               </span>
-
-              <div className="mt-3 mb-5 align-self-start">
-                <ModalButton action="info" label="Faktoja minusta" />
+              <div className='row'>
+                <div className="col-3">
+                  <ModalButton action="info" label="Faktoja minusta" />
+                </div>
+                <div className="col-3">
+                  <ModalButton action="cv" label='Lataa CV' />
+                </div>
               </div>
             </div>
 
@@ -55,10 +61,72 @@ const Home = () => {
           </div>
 
           <div className='row d-flex mt-5 mx-auto' style={{ maxWidth: '95%' }}>
-            <p>Tämänhetkistä osaamistasoani kuvastaa vanhojen harjoitustöiden sijasta todennäköisimmin tämä sivusto,
-              jonka rakentamisessa on yhdistelty useita erilaisia tekniikoita. Lue lisää <a href="/aboutpage">täältä</a>.</p>
-            <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin <a href="/contact"> pyytämällä testitunnuksia</a>. Testitunnuksilla pääset kirjautumaan sivustolle admin-käyttäjänä ja tutustumaan hallintapaneeliin.
+            <p>Tämänhetkistä osaamistasoani kuvastaa vanhojen harjoitustöiden sijasta todennäköisimmin <a href="/aboutpage">tämä sivusto</a> sekä <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -projekti.</p>
+            <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin kirjautumalla sisään testitunnuksilla.<br/><br />
+              - Käyttäjätunnus on <b>{testUsernamePart1 + testUsernameOtherParts[0] + testUsernamePart2 + testUsernameOtherParts[1]}</b><br />
+              - Salasana on <b>salasana</b> isolla alkukirjaimella, a-kirjaimet korvattuna numerolla 4, ja lopuksi huutomerkki.<br /><br />
+              Testitunnuksilla pääset kirjautumaan sivustolle admin-käyttäjänä ja tutustumaan hallintapaneeliin.
               Sivuston suojaamiseksi varsinaiset tietokantamutaatiot on estetty.</p>
+          </div>
+        </div>
+
+                <div className='row mt-5'></div>
+
+        <div className='row mt-5 glow'>
+          <div className='col-12 col-md-4 d-flex justify-content-center'>
+            <h2 className='frontPage-headers'>Projekteja</h2>
+          </div>
+        </div>
+
+        <div className='row justify-content-center text-center glow'>
+          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
+            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title">Maisemanavigaattori</h5>
+                <h6 className="card-subtitle mb-2 text-muted">Koodissa on käytetty OpenStreetMapin karttoja, HEREN geokoodausta sekä Overpass APIa reittihakuun. Ohjelma on keskeneräinen, mutta suunnitelmissa on koodata tämä uusiksi <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifelinen</a> valmistuttua.</h6>
+                <img
+                  src="/old-exercises/Maisemanavigaattori/images/naviCode.png"
+                  alt="Maisemanavigaattori"
+                  className="img-fluid rounded border mb-4"
+                  style={{ objectFit: "cover" }}
+                />
+                <div className="mt-auto">
+                  <a
+                    href="/old-exercises/Maisemanavigaattori/index.html"
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Tutustu
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
+            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title">Pong</h5>
+                <h6 className="card-subtitle mb-2 text-muted">Oma versioni klassikkopelistä</h6>
+                <img
+                  src="/old-exercises/Pong/img/pong.png"
+                  alt="Pong"
+                  className="img-fluid rounded border mb-4"
+                  style={{ objectFit: "cover" }}
+                />
+                <div className="mt-auto">
+                  <a
+                    href="/old-exercises/Pong/pong.html"
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Kokeile
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -109,66 +177,6 @@ const Home = () => {
             </div>
           </>
         )}
-
-        <div className='row mt-5'></div>
-
-        <div className='row mt-5 glow'>
-          <div className='col-12 col-md-4 d-flex justify-content-center'>
-            <h2 className='frontPage-headers'>Projekteja</h2>
-          </div>
-        </div>
-
-        <div className='row justify-content-center text-center glow'>
-          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
-            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
-              <div className="card-body text-center d-flex flex-column">
-                <h5 className="card-title">Maisemanavigaattori</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Koodissa on käytetty OpenStreetMapin karttoja, HEREN geokoodausta sekä Overpass APIa reittihakuun. Ohjelma jäi keskeneräiseksi ohjelmointinäyttöprojektiksi.</h6>
-                <img
-                  src="/old-exercises/Maisemanavigaattori/images/naviCode.png"
-                  alt="Maisemanavigaattori"
-                  className="img-fluid rounded border mb-4"
-                  style={{ objectFit: "cover" }}
-                />
-                <div className="mt-auto">
-                  <a
-                    href="/old-exercises/Maisemanavigaattori/index.html"
-                    className="btn btn-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Tutustu
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
-            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
-              <div className="card-body text-center d-flex flex-column">
-                <h5 className="card-title">Pong</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Oma versioni klassikkopelistä</h6>
-                <img
-                  src="/old-exercises/Pong/img/pong.png"
-                  alt="Pong"
-                  className="img-fluid rounded border mb-4"
-                  style={{ objectFit: "cover" }}
-                />
-                <div className="mt-auto">
-                  <a
-                    href="/old-exercises/Pong/pong.html"
-                    className="btn btn-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Kokeile
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div className="row mt-5 text-center glow-light">
           <div className="col-md-8 mx-auto mt-5 text-center">

@@ -41,7 +41,7 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
 
   if (action === 'cv') {
     return (
-      <a className="btn btn-primary mt-3 mx-2" href={cv} download>
+      <a className="btn btn-primary mt-3 mx-2" href={cv} download style={{width: '10vw'}}>
         {label}
       </a>
     )
@@ -53,6 +53,7 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
       className={`btn mt-3 mx-2 ${buttonType}`}
       onClick={handleClick}
       disabled={disabled}
+      style={{width: '10vw'}}
     >
       {label}
     </button>
