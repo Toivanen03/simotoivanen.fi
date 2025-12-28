@@ -7,6 +7,8 @@ import { updateUserSchema, updatePasswordSchema } from '../../schema/validateUse
 import { useLocation } from "react-router-dom"
 import { AuthContext } from "../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
+import Spinner from '../middleware/spinner'
+import ErrorDiv from '../middleware/errorDiv'
 
 const Profile = ({ setConfirmTitle, isMobile }) => {
     const [phone, setPhone] = useState('')
@@ -20,26 +22,17 @@ const Profile = ({ setConfirmTitle, isMobile }) => {
     const ref = new URLSearchParams(location.search).get('ref')
     const { currentUser } = useContext(AuthContext)
     const navigate = useNavigate()
+        const { data, loading, error, refetch } = useQuery(ME, {
+        onError: (error) => {
+            errorHandler(setConfirmTitle, error)
+        },
+    })
 
     useEffect(() => {
         if (currentUser && ref && currentUser.username !== ref) {
             navigate('/unauthorized')
         }
-    }, [currentUser, ref, navigate])
-
-    if (!currentUser || !ref) {
-        return <div>Loading...</div>
-    }
-
-    if (currentUser.username !== ref) {
-        return null
-    }
-
-    const { data } = useQuery(ME, {
-        onError: (error) => {
-            errorHandler(setConfirmTitle, error)
-        },
-    })
+    }, [currentUser, ref])
 
     useEffect(() => {
         if (data?.me?.emailConsent !== undefined) {
@@ -147,6 +140,14 @@ const Profile = ({ setConfirmTitle, isMobile }) => {
         })
     }
 
+    if (!currentUser || !ref || loading) {
+        return <Spinner text={"Ladataan..."} />
+    }
+
+    if (error) {
+        return <ErrorDiv error={error} refetch={refetch} />
+    }
+
     return (
         <div className="container profile">
             <div className="row glow">
@@ -217,6 +218,7 @@ const Profile = ({ setConfirmTitle, isMobile }) => {
                             />
                         </div>
                         <div className="d-flex justify-content-center gap-2 flex-wrap mb-3">
+
                             <ModalButton
                                 action={'delPhone'}
                                 label={'Poista puhelin'}
@@ -224,14 +226,9 @@ const Profile = ({ setConfirmTitle, isMobile }) => {
                                 setConfirmTitle={setConfirmTitle}
                                 id={myProfile?.id}
                                 disabled={!myProfile?.phone}
+                                isMobile={isMobile}
                             />
-                            <button
-                                type='submit'
-                                disabled={phone.trim() === '' && about.trim() === ''}
-                                className="btn btn-primary"
-                            >
-                                Päivitä profiili
-                            </button>
+
                             <ModalButton
                                 action={'delAbout'}
                                 label={'Poista lisätiedot'}
@@ -239,7 +236,16 @@ const Profile = ({ setConfirmTitle, isMobile }) => {
                                 setConfirmTitle={setConfirmTitle}
                                 id={myProfile?.id}
                                 disabled={!myProfile?.about}
+                                isMobile={isMobile}
                             />
+
+                            <button
+                                type='submit'
+                                disabled={phone.trim() === '' && about.trim() === ''}
+                                className="btn btn-primary"
+                            >
+                                Päivitä profiili
+                            </button>
                         </div>
 
                         <div className="d-flex align-items-center justify-content-center mb-0">

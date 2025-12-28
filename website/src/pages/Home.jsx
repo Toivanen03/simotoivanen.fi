@@ -10,6 +10,9 @@ import Spinner from '../middleware/spinner'
 import ErrorDiv from '../middleware/errorDiv'
 import { useState } from 'react'
 
+import pkpirttiry from '../assets/pkpirttiry.png'
+import lifeline from '../assets/lifeline.png'
+
 const Home = ({ isMobile }) => {
   const { loading, error, data, refetch } = useQuery(LATEST_BLOGS)
   const [hover, setHover] = useState(false)
@@ -102,7 +105,7 @@ const Home = ({ isMobile }) => {
                 <h6 className="card-subtitle mb-2 text-muted text-start p-1"><i>"Simo Toivanen aloitti projektin tutustumalla päiväkodin vanhoihin nettisivuihin ja somealustoihin. Uusia nettisivuja ohjelmoidessaan hän piti päiväkodin johtajaa hyvin kartalla etenemisestä ja osasi selittää siihen liittyviä asioita ymmärrettävästi ja kärsivällisesti. Simo on oma-aloitteinen, mutta kysyi hyvin myös palautetta ja teki ulkoasuun liittyen pyydettyjä muutoksia. Hän teki hyviä ehdotuksia ja selvitti eri mahdollisuuksia toteutukseen liittyen. Lopputulos on selkeä, kohderyhmälle soveltuva kokonaisuus. Nettisivujen ylläpito vaikuttaa riittävän yksinkertaiselle myös asioista vähän ymmärtävälle ja Simo on palvelualttiisti luvannut auttaa nettisivujen ylläpidossa myös jatkossa. Ns. maallikon silmin nettisivut valmistuivat hämmästyttävän nopeasti!"</i></h6>
                 <h6 className="card-subtitle mb-2 text-muted text-start mt-2 mb-2">- Ronja Tarkiainen,<br /><span className='ms-2'>Päiväkodin johtaja</span></h6>
                 <img
-                  src="./src/assets/pkpirttiry.png"
+                  src={pkpirttiry}
                   alt="Kuvakaappaus päiväkoti Pirtin etusivusta"
                   className="img-fluid rounded border mb-4"
                   style={{ objectFit: "cover" }}
@@ -128,7 +131,7 @@ const Home = ({ isMobile }) => {
                 <h6 className="card-subtitle mb-2 text-muted mt-2">Mobiilisovellus perhearjen helpottamiseksi.</h6>
                 <h6 className="card-subtitle mb-2 text-muted mt-3 mb-5">Kuvakaappaus on sovelluksen web-hallintapaneelista. Voit tutustua lähdekoodiin Githubissa klikkaamalla alla olevaa painiketta.</h6>
                 <img
-                  src="./src/assets/lifeline.png"
+                  src={lifeline}
                   alt="Kuvakaappaus Lifeline-sovelluksen web-hallintapaneelista."
                   className="img-fluid rounded border mb-4"
                   style={{

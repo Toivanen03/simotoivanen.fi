@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 
 const UpdateNotice = ({ onClose }) => {
+
   return (
     <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
       <div className="modal-dialog modal-dialog-centered">

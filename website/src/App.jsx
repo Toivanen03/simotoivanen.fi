@@ -40,6 +40,11 @@ function App() {
   const [showNotice, setShowNotice] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
 
+  const buildDate = new Date(import.meta.env.VITE_BUILD_TIME)
+  const now = new Date()
+
+  const diff = (now - buildDate) / (1000 * 60 * 60 * 24)
+
   let baseURL = config()
 
   const NavigateHelper = () => {
@@ -64,10 +69,10 @@ function App() {
 
   useEffect(() => {
     const alreadySeen = localStorage.getItem('updateNoticeSeen')
-    if (!alreadySeen) {
+    if (!alreadySeen && diff < 30) {
       setShowNotice(true)
     }
-  }, [])
+  }, [diff])
 
   useEffect(() => {
     if (showNotice) {
@@ -111,7 +116,7 @@ function App() {
           localStorage.setItem('lastCheck', new Date(data.now).toISOString())
         })
         .catch(console.error)
-      }, 10 * 6000)
+      }, 60000)
 
       return () => clearInterval(intervalId)
     }, [])

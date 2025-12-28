@@ -345,8 +345,8 @@ form {
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 12vh;
   background: $header-footer-gradient;
-  padding: 10px;
   border-bottom: 2px solid gray;
   z-index: 9999;
   text-align: center;

@@ -22,7 +22,7 @@ const Blogs = () => {
     }, [location])
 
     if (loading) return <Spinner text={"Ladataan blogeja..."} />
-    if (!error) return <ErrorDiv error={error ? error : "Virhe ladattaessa blogeja."} refetch={refetch} />
+    if (error) return <ErrorDiv error={error ? error : "Virhe ladattaessa blogeja."} refetch={refetch} />
 
     const filteredBlogs = () => {
         const sorted = newest ? data.blogs.slice().reverse() : data.blogs
