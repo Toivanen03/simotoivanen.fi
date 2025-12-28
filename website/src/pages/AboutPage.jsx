@@ -1,48 +1,51 @@
 import CodeExpand from '../middleware/CodeExpand'
 
 const AboutPage = ({ isMobile }) => {
-    const Example = ({ code, header }) => {
-        return (
-            <div className="d-flex mt-4 mb-4 justify-content-center">
-                {!isMobile ? (<div style={{ width: '90%' }}>
-                  <h4>{header}</h4>
-                  <CodeExpand code={code} />
-                </div>
-                ) : (
-                <div style={{ width: '110%' }}>
-                  <h4>{header}</h4>
-                  <CodeExpand code={code} />
-                </div>
-                )}
-            </div>
-        )
-    }
+  const buildDate = new Date(import.meta.env.VITE_BUILD_TIME)
+
+  const Example = ({ code, header }) => {
+      return (
+          <div className="d-flex mt-4 mb-4 justify-content-center">
+              {!isMobile ? (<div style={{ width: '90%' }}>
+                <h4>{header}</h4>
+                <CodeExpand code={code} />
+              </div>
+              ) : (
+              <div style={{ width: '110%' }}>
+                <h4>{header}</h4>
+                <CodeExpand code={code} />
+              </div>
+              )}
+          </div>
+      )
+  }
 
     return (
-        <div className='blogsBg'>
-            <div className='container mt-5'>
-                <div className='row mb-5 glow'>
-                    <div className='col-4'>
-                        <h1 className='text-center fw-bold'>Tietoa sivustosta</h1>
-                    </div>
+      <div className='blogsBg'>
+        <div className='container mt-5'>
+          <div className='row mb-5 glow'>
+            <div className='col-4'>
+              <h1 className='text-center fw-bold'>Tietoa sivustosta</h1>
                 </div>
-                <div className='col-12 col-md-10 offset-md-1'>
-                    <div className='card shadow-sm h-100 glow mb-5'>
-                        <div className='card-body blogsCard'>
-                            <h5 className='card-subtitle text-muted'>Julkaistu 2.6.2025</h5>
-                            <section className="container my-5">
-                            <h2 className="mb-4">Simotoivanen.fi - tekninen esittely</h2>
-                            <p>
-                                <strong>Simotoivanen.fi</strong> on rakennettu moderneilla JavaScript-tekniikoilla. Sivun frontend on toteutettu <strong>React</strong>illa käyttäen
-                                <strong> React Router</strong>ia reititykseen, <strong>Bootstrap</strong>ia tyylittelyyn ja <strong>Vite</strong>ä
-                                kehitysympäristönä sekä ympäristömuuttujien hallintaan. Sivuston data tallentuu <strong>MongoDb</strong>-tietokantaan, josta <strong>Raspberry Pi Zero</strong>lla pyörivä backend hakee mm. blogit ja käyttäjätiedot.
-                            </p>
+            </div>
 
-                            <hr className="my-4" />
+            <div className='col-12 col-md-10 offset-md-1'>
+              <div className='card shadow-sm h-100 glow mb-5'>
+                <div className='card-body blogsCard'>
+                  <h5 className='card-subtitle text-muted'>Päivitetty {`${String(buildDate.getDate()).padStart(2,'0')}.${String(buildDate.getMonth()+1).padStart(2,'0')}.${buildDate.getFullYear()}`}</h5>
+                  <section className="container my-5">
+                    <h2 className="mb-4">Simotoivanen.fi - tekninen esittely</h2>
+                    <p>
+                      <strong>Simotoivanen.fi</strong> on rakennettu moderneilla JavaScript-tekniikoilla. Sivun frontend on toteutettu <strong>React</strong>illa käyttäen
+                      <strong> React Router</strong>ia reititykseen, <strong>Bootstrap</strong>ia tyylittelyyn ja <strong>Vite</strong>ä
+                        kehitysympäristönä sekä ympäristömuuttujien hallintaan. Sivuston data tallentuu <strong>MongoDb</strong>-tietokantaan, josta <strong>Raspberry Pi 4</strong>:llä pyörivä backend hakee mm. blogit ja käyttäjätiedot.
+                    </p>
 
-                            <h4 className="mb-4 mt-5">Frontend-rakenne</h4>
+                    <hr className="my-4" />
+
+                    <h4 className="mb-4 mt-5">Frontend-rakenne</h4>
                             
-                                <p><strong>Komponenttipohjainen arkkitehtuuri:</strong> Sivun layout (header, footer, sisältöalue) koostuvat uudelleenkäytettävistä React-komponenteista.</p>
+                    <p><strong>Komponenttipohjainen arkkitehtuuri:</strong> Sivun layout (header, footer, sisältöalue) koostuvat uudelleenkäytettävistä React-komponenteista.</p>
 <Example header={'Header.jsx:'} code={`
 import { Modal } from 'bootstrap'
 import { useContext } from 'react'
