@@ -26,9 +26,9 @@ const Footer = () => {
         <div className={showScrollTop ? 'col-4' : 'col-6'}>
           <p className="mb-0 text-nowrap">
             {width <= 400 ? (
-              <small>{showScrollTop ? '© ST 2025' : '© Simo Toivanen'}</small>
+              <small>{showScrollTop ? '© ST 2026' : '© Simo Toivanen'}</small>
             ) : (
-              '© Simo Toivanen 2025'
+              '© Simo Toivanen 2026'
             )}
           </p>
         </div>

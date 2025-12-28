@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { GET_BLOG } from '../../schema/queries'
 import { FaWhatsapp, FaLinkedin, FaFacebook } from 'react-icons/fa'
 import useWindowWidth from '../middleware/useWindowWidth'
+import Spinner from '../middleware/spinner'
+import ErrorDiv from '../middleware/errorDiv'
 
 const ShareButtons = ({ id, title, iconSize }) => {
   const blogUrl = `https://simotoivanen.fi/blog?id=${id}`
@@ -57,12 +59,12 @@ const Blog = () => {
   const iconSize = width < 768 ? '1.2em' : width < 992 ? '1.8em' : '3em'
 
   const { id } = useParams()
-  const { data, loading, error } = useQuery(GET_BLOG, {
+  const { data, loading, error, refetch } = useQuery(GET_BLOG, {
     variables: { id }
   })
 
-  if (loading) return <p>Ladataan...</p>
-  if (error) return <p>Virhe: {error.message}</p>
+  if (loading) return <Spinner text={"Ladataan..."} />
+  if (error) return <ErrorDiv error={error} refetch={refetch} />
 
   const blog = data?.getBlog
 
@@ -84,18 +86,18 @@ const Blog = () => {
   return (
     <div className='blogsBg'>
       <div className='container mt-4 text-center blog glow'>
-        <h1>{blog.title}</h1>
+        <h1>{blog?.title && blog.title}</h1>
 
-        {blog.subtitle && <h3 className='text-muted mt-4'>{blog.subtitle}</h3>}<br />
+        {blog?.subtitle && <h3 className='text-muted mt-4'>{blog.subtitle}</h3>}<br />
         <div className='d-flex justify-content-center'>
-          {handleContent(blog.content)}
+          {blog?.content && handleContent(blog.content)}
         </div><br />
         <small className='text-muted'>
-          Julkaistu: {new Date(Number(blog.createdAt)).toLocaleDateString('fi-FI')}
+          {blog?.createdAt && <span>Julkaistu: {new Date(Number(blog.createdAt)).toLocaleDateString('fi-FI')}</span>}
         </small>
         <div className="col justify-content-center gap-4 mt-4" style={{ marginLeft: '-20px' }}>
           <span style={{marginRight: '20px', fontWeight: 'bold'}}>Jaa:</span>
-          <ShareButtons id={id} title={blog.title} iconSize={iconSize} />
+          { blog && <ShareButtons id={id} title={blog.title} iconSize={iconSize} />}
         </div>
       </div>
     </div>

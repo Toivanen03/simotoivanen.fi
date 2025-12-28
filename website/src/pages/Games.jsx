@@ -1,20 +1,11 @@
-import { imgStyle } from "../layout/ExerciseStyles"
-import { Modal } from "bootstrap"
-import { Link } from "react-router-dom"
-
 const links = {
     clicker: "/old-exercises/Clicker/clicker.html",
     slots: "/old-exercises/Hedelmapeli/slots.html",
-    mato: "/old-exercises/matopeli/index.html",
+    mato: "/old-exercises/matopeli/menu.html",
     pong: "/old-exercises/Pong/pong.html"
 }
 
 const Games = () => {
-    const login = () => {
-        const loginModalElement = document.getElementById('LoginModal')
-        const loginModal = Modal.getInstance(loginModalElement) || new Modal(loginModalElement)
-        loginModal.show()
-    }
     
     return (
         <div className="gameArea">
@@ -25,13 +16,9 @@ const Games = () => {
                     </div>
                     <div className="col-12 col-md-7" style={{ textAlign: 'justify' }}>
                         <p className="fs-5 mb-5">
-                        Pelit ovat viimeistelemättömiä eivätkä näy oikein kaikilla laitteilla. Kyseiset projektit ovat opintojen aikaisia koodausharjoituksia, joilla on harjoiteltu erilaisia
-                        koodauksen perustaitoja, kuten esimerkiksi Canvas APIa, alueen tunnistamista, funktioita tai interaktioita. Linkit pelien GitHub-repositorioihin löytyvät <Link to="/exercises">täältä</Link> (vaatii{' '}
-                        <span onClick={() => login()} style={{ cursor: 'pointer', color: '#0d6efd', textDecoration: 'underline' }}>
-                            kirjautumisen
-                        </span>).
+                            Pelit ovat opintojen aikaisia koodausharjoituksia, joilla on harjoiteltu erilaisia perustekniikoita, kuten esimerkiksi Canvas APIa, alueen tunnistamista, funktioita tai interaktioita.
                         </p>
-                        <p>Pong-peliä lukuunottamatta pelit eivät välttämättä toimi oikein mobiililaitteilla.</p><br />
+                        <p>Pong-peliä lukuunottamatta pelit eivät välttämättä toimi oikein mobiililaitteilla. Koska nämä pelit ovat vain tekniikkaharjoituksia, responsiivisuus eri kokoisilla näytöillä saattaa vaihdella.</p><br />
                     </div>
                 </div>
 
@@ -47,7 +34,7 @@ const Games = () => {
                         <img
                             src="/old-exercises/matopeli/img/mato.png"
                             alt="Matopeli"
-                            style={imgStyle}
+                            className="game-img"
                         />
                         </a>
                     </div>
@@ -65,7 +52,7 @@ const Games = () => {
                         <img
                             src="/old-exercises/Clicker/img/ossi.png"
                             alt="Clicker-peli"
-                            style={imgStyle}
+                            className="game-img"
                         />
                         </a>
                     </div>
@@ -83,7 +70,7 @@ const Games = () => {
                         <img
                             src="/old-exercises/Hedelmapeli/img/slots.png"
                             alt="Hedelmäpeli"
-                            style={imgStyle}
+                            className="game-img"
                         />
                         </a>
                     </div>
@@ -101,7 +88,7 @@ const Games = () => {
                         <img
                             src="/old-exercises/Pong/img/pong.png"
                             alt="Pong"
-                            style={imgStyle}
+                            className="game-img"
                         />
                         </a>
                     </div>

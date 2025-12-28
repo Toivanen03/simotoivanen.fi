@@ -2,6 +2,8 @@ import { useQuery } from '@apollo/client'
 import { BLOGS } from '../../schema/queries'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Spinner from '../middleware/spinner'
+import ErrorDiv from '../middleware/errorDiv'
 
 const Blogs = () => {
     const [newest, setNewest] = useState(true)
@@ -19,8 +21,8 @@ const Blogs = () => {
         refetch()
     }, [location])
 
-    if (loading) return <p>Ladataan blogeja...</p>
-    if (error) return <p>Virhe ladattaessa blogeja</p>
+    if (loading) return <Spinner text={"Ladataan blogeja..."} />
+    if (!error) return <ErrorDiv error={error ? error : "Virhe ladattaessa blogeja."} refetch={refetch} />
 
     const filteredBlogs = () => {
         const sorted = newest ? data.blogs.slice().reverse() : data.blogs

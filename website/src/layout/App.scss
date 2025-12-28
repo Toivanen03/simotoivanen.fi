@@ -11,6 +11,9 @@ $header-footer-gradient: linear-gradient(to bottom, #1f1f1f, #2e2e2e);
   white-space: normal;
 }
 
+$footer-height: 8vh;
+$header-height: 11vh;
+
 // Global Styles
 * {
   margin: 0;
@@ -28,6 +31,56 @@ html, body, #root {
 body {
   display: flex;
   flex-direction: column;
+
+  .loader-container {
+  display: flex;
+  background-color: $tumma;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - $footer-height - $header-height);
+
+    .loader {
+      border: 2px solid;
+      border-color: transparent #FFF;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: inline-block;
+      position: relative;
+      box-sizing: border-box;
+      animation: rotation 2s linear infinite;
+    }
+
+    .loader::after {
+      content: '';  
+      box-sizing: border-box;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border: 24px solid;
+      border-color: transparent rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .game-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: white;
+  }
 }
 
 main {
@@ -60,11 +113,17 @@ header, footer {
   border: none;
 }
 
+header {
+  min-height: $header-height;
+  border-bottom: 1px solid black;
+}
+
 footer {
+  border-top: 1px solid black;
   position: fixed;
   bottom: 0;
   width: 100%;
-  min-height: 8vh;
+  min-height: $footer-height;
   padding: auto;
   align-items: center;
 

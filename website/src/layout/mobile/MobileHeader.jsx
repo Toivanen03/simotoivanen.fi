@@ -18,7 +18,6 @@ const MobileHeader = ({ setConfirmTitle, setOnConfirm }) => {
 
   const pages = {
     undefined: "Etusivu",
-    exercises: "Harjoitukset",
     admin: "Admin",
     games: "Pelit",
     profile: "Profiili",
@@ -103,15 +102,11 @@ const MobileHeader = ({ setConfirmTitle, setOnConfirm }) => {
                 <Link className="nav-link" to="/contact" onClick={collapseNavbar}>{<FaEnvelope />} Ota yhteyttä</Link>
               </li>
             )}
-            {!isLoggedIn ? (
+            {!isLoggedIn && 
               <li className="nav-item">
                 <Link className="nav-link" to="#" onClick={addUser}>{<FaUserPlus />} Luo tunnukset</Link>
               </li>
-            ) : (
-              <li className="nav-item">
-                <Link className="nav-link" to="/exercises" onClick={collapseNavbar}>{<FaSchool />} Opintoni</Link>
-              </li>
-            )}
+            }
             <li className="nav-item">
               <Link className="nav-link" to="/aboutpage" onClick={collapseNavbar}>{<FaInfo />} Tietoa sivustosta</Link>
             </li>

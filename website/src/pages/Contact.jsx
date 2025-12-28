@@ -41,14 +41,14 @@ const Contact = ({ setConfirmTitle, setOnConfirm }) => {
                 <div className="col-md-8">
                     <h1>Ota yhteyttä</h1>
                     <div className="contact-field mt-3">
-                        <p>Laita viestiä, jos sinulla on ajatusta jonkinlaisesta yhteistyöstä, tai muuta painavaa sanottavaa.</p>
-                        <p>Etsin ensisijaisesti työharjoittelupaikkaa viimeisiä opintonäyttöjäni varten, mutta olen kiinnostunut myös muista erilaisista pikkuprojekteista, kuten vaikka esimerkiksi:</p>
+                        <p>Etsin ensisijaisesti palkkatyötä ohjelmistokehittäjänä, mutta projektin luonteesta riippuen olen valmis harkitsemaan toiminimilaskuttamista. Ota yhteyttä ja kysy lisää, jos mielessäsi on vaikka esimerkiksi:</p>
                         <ul>
                             <li>Nettisivut</li>
                             <li>Peliprojektit</li>
                             <li>Tietokantaprojektit</li>
                             <li>Mobiilisovellukset</li>
                         </ul>
+                        <p className="mt-4">Vastaan viestiisi mahdollisimman pian!</p>
                     </div>
                 </div>
 

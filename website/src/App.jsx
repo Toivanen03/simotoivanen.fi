@@ -20,7 +20,6 @@ import { AuthProvider } from './contexts/AuthContext'
 
 import Admin from './pages/Admin'
 import Home from './pages/Home'
-import Exercises from './pages/Exercises'
 import LogoutHandler from './pages/LogoutHandler'
 import Contact from './pages/Contact'
 import Unauthorized from './pages/Unauthorized'
@@ -130,7 +129,6 @@ function App() {
             <main className="main-content">
               <Routes>
                 <Route path="/" element={<Home isMobile={isMobile} />} />
-                <Route path="/exercises" element={<RequireAuth><Exercises /></RequireAuth>} />
                 <Route path="/admin" element={<RequireAdmin><Admin setConfirmTitle={setConfirmTitle} setOnConfirm={setOnConfirm} isMobile={isMobile} /></RequireAdmin>} />
                 <Route path="/games" element={<Games />} />
                 <Route path="/profile" element={<RequireAuth><Profile setConfirmTitle={setConfirmTitle} isMobile={isMobile} /></RequireAuth>} />

@@ -30,7 +30,7 @@ const Footer = () => {
         <div className='col-2'>
           <p>
             {width > 768 ? (
-              <small>© Simo Toivanen {width > 1583 && '2025'}</small>
+              <small>© Simo Toivanen {width > 1583 && '2026'}</small>
             ) : (
               '© Simo Toivanen'
             )}

@@ -6,18 +6,21 @@ import { LATEST_BLOGS } from '../../schema/queries'
 import { Link } from 'react-router-dom'
 import { Node, JS, TS, HTML, CSS, Docker, Python, Bootstrap, React } from '../assets/svg/Logos'
 import { useEffect } from 'react'
+import Spinner from '../middleware/spinner'
+import ErrorDiv from '../middleware/errorDiv'
 
 const Home = ({ isMobile }) => {
   const { loading, error, data, refetch } = useQuery(LATEST_BLOGS)
   const testUsernamePart1 = "test"
   const testUsernamePart2 = "simotoivanen"
   const testUsernameOtherParts = ["@", ".fi"]
+
   useEffect(() => {
     refetch()
   }, [])
 
-  if (loading) return <p>Ladataan...</p>
-  if (error) return <p>Virhe: {error.message}</p>
+  if (loading) return <Spinner />
+  if (error) return <ErrorDiv error={error} refetch={refetch} />
   
   return (
     <div className="homeBg">
@@ -32,13 +35,11 @@ const Home = ({ isMobile }) => {
           <div className='row'>
             <div className="col-md-8 mt-4 d-flex flex-column justify-content-start">
               <span className="lead">
-                <strong>Olen Simo Toivanen</strong>, ohjelmistokehittäjäopintojen loppuvaiheessa oleva opiskelija, jolla on{' '}
-                <em>vahva tausta teknisestä työstä ja ongelmanratkaisusta</em> ― erityisesti autoasentajana sekä{' '}
-                <em>puhelin- ja tietokonehuoltoyrittäjänä</em>. Etsin ohjelmistoalalta harjoittelu- tai työmahdollisuuksia,
-                joissa voin hyödyntää{' '}
-                <em>
-                  analyyttistä ajattelukykyäni, ongelmanratkaisutaitojani ja <strong>jatkuvaa haluani oppia uutta!</strong>
-                </em>
+                <p>Olen <strong>Simo Toivanen</strong>, juuri maksimiarvosanoin valmistunut ohjelmistokehittäjä.
+                Minulla on vahva aiempi tausta teknisestä työstä ja ongelmanratkaisusta autoasentajana sekä
+                puhelin- ja tietokonehuoltoyrittäjänä, ja nyt etsin ohjelmistoalalta työmahdollisuuksia,
+                joissa voin hyödyntää analyyttistä ajattelukykyäni, ongelmanratkaisutaitojani sekä <strong>jatkuvaa haluani oppia uutta!</strong>
+                </p>
               </span>
               {!isMobile ? (
                 <div className='row'>
@@ -72,11 +73,13 @@ const Home = ({ isMobile }) => {
           </div>
 
           <div className='row d-flex mt-5 mx-auto' style={{ maxWidth: '95%' }}>
-            <p>Tämänhetkistä osaamistasoani kuvastaa vanhojen harjoitustöiden sijasta todennäköisimmin <a href="/aboutpage">tämä sivusto</a> sekä <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -projekti.</p>
-            <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin kirjautumalla sisään testitunnuksilla.<br/><br />
-              - Käyttäjätunnus on <b aria-hidden="true">{testUsernamePart1 + testUsernameOtherParts[0] + testUsernamePart2 + testUsernameOtherParts[1]}</b><br />
-              - Salasana on <b>salasana</b> isolla alkukirjaimella, a-kirjaimet korvattuna numerolla 4, ja lopuksi huutomerkki.<br /><br />
-              Testitunnuksilla pääset kirjautumaan sivustolle admin-käyttäjänä ja tutustumaan hallintapaneeliin.
+            <p>Tämänhetkistä osaamistasoani kuvastaa ehkä parhaiten <a href="/aboutpage">tämä sivusto</a>, opinnäytetyönä tekemäni <a href="https://www.pkpirttiry.fi/" target="_blank" rel="noopener noreferrer">päiväkoti Pirtin</a> verkkosivusto sekä kehitteillä oleva <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -projektini.</p>
+            <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin kirjautumalla sisään testitunnuksilla.</p>
+            <ul>
+              <li className='ms-5'>Käyttäjätunnus on <b aria-hidden="true">{testUsernamePart1 + testUsernameOtherParts[0] + testUsernamePart2 + testUsernameOtherParts[1]}</b></li>
+              <li className='ms-5'>Salasana on <b>salasana</b> isolla alkukirjaimella, a-kirjaimet korvattuna numerolla 4, ja lopuksi huutomerkki.</li>
+            </ul>
+            <p>Testitunnuksilla pääset kirjautumaan sivustolle admin-käyttäjänä ja tutustumaan hallintapaneeliin.
               Sivuston suojaamiseksi varsinaiset tietokantamutaatiot on estetty.</p>
           </div>
         </div>
@@ -94,7 +97,7 @@ const Home = ({ isMobile }) => {
             <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
               <div className="card-body text-center d-flex flex-column">
                 <h5 className="card-title">Maisemanavigaattori</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Koodissa on käytetty OpenStreetMapin karttoja, HEREN geokoodausta sekä Overpass APIa reittihakuun. Ohjelma on keskeneräinen, mutta suunnitelmissa on koodata tämä uusiksi <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifelinen</a> valmistuttua.</h6>
+                <h6 className="card-subtitle mb-2 text-muted">Koodissa on käytetty OpenStreetMapin karttoja, HEREN geokoodausta sekä Overpass APIa reittihakuun. Ohjelma on keskeneräinen, mutta suunnitelmissa on koodata tämä uusiksi Reactilla hyödyntäen vanhasta koodista vain reitinlaskenta-algoritmit.</h6>
                 <img
                   src="/old-exercises/Maisemanavigaattori/images/naviCode.png"
                   alt="Maisemanavigaattori"
@@ -119,7 +122,7 @@ const Home = ({ isMobile }) => {
             <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
               <div className="card-body text-center d-flex flex-column">
                 <h5 className="card-title">Pong</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Oma versioni klassikkopelistä</h6>
+                <h6 className="card-subtitle mb-2 text-muted">Oma versioni klassikkopelistä Javascriptillä ja CanvasAPIlla.</h6>
                 <img
                   src="/old-exercises/Pong/img/pong.png"
                   alt="Pong"

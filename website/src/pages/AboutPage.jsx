@@ -31,7 +31,7 @@ const AboutPage = ({ isMobile }) => {
                         <div className='card-body blogsCard'>
                             <h5 className='card-subtitle text-muted'>Julkaistu 2.6.2025</h5>
                             <section className="container my-5">
-                            <h2 className="mb-4">Sivuston tekninen esittely</h2>
+                            <h2 className="mb-4">Simotoivanen.fi - tekninen esittely</h2>
                             <p>
                                 <strong>Simotoivanen.fi</strong> on rakennettu moderneilla JavaScript-tekniikoilla. Sivun frontend on toteutettu <strong>React</strong>illa käyttäen
                                 <strong> React Router</strong>ia reititykseen, <strong>Bootstrap</strong>ia tyylittelyyn ja <strong>Vite</strong>ä
@@ -609,12 +609,7 @@ const MailSender = async (users, resetToken, blog, message) => {
 export default MailSender
 `} />
                             <hr className="my-4" />
-
-                            <h3 className="mb-4 mt-5">Suunnitteilla olevat lisäykset</h3>
-                            
-                                <p><strong>Mobiilisovellus:</strong> Käyttäjien hallinta sekä sivun sisällön päivitykset keskitetysti. (vain admin)</p>
                             </section>
-                            <p>Sivustoa päivitetään satunnaisesti. Pääpaino kehitystyössäni on nyt <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -sovelluksessani.</p>
                         </div>
                     </div>
                 </div>

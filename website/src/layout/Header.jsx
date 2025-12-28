@@ -18,7 +18,6 @@ const Header = ({ setConfirmTitle, setOnConfirm }) => {
   const addUserIcon = (<FaUserPlus size={iconSize} className="text-white" />)
   const loginIcon = (<FaSignInAlt size={iconSize} className="text-white" />)
   const logoutIcon = (<FaSignOutAlt size={iconSize} className="text-white" />)
-  const studiesIcon = (<FaSchool size={iconSize} className='text-white' />)
   const adminIcon = (<FaToolbox size={iconSize} className='text-white' />)
   const gamesIcon = (<FaGamepad size={iconSize} className='text-white' />)
   const settingsIcon = (<FaWrench size={iconSize} className='text-white' />)
@@ -75,7 +74,7 @@ const Header = ({ setConfirmTitle, setOnConfirm }) => {
           </Link>
         </div>
 
-        {!isLoggedIn ? (
+        {!isLoggedIn && 
           <div className="col text-center highlight">
             <div onClick={newUser} style={{ cursor: 'pointer' }}>
               {addUserIcon}
@@ -84,14 +83,7 @@ const Header = ({ setConfirmTitle, setOnConfirm }) => {
               <Link onClick={newUser} className='text-white text-decoration-none' style={fontSize}>Luo tunnukset</Link>
             </div>
           </div>
-        ) : (
-          <div className='col text-center highlight'>
-            <Link to={'/exercises'} className="text-white text-decoration-none d-flex flex-column align-items-center">
-              {studiesIcon}
-              <span style={fontSize} className='mt-2'>Opintoni</span>
-            </Link>
-          </div>
-        )}
+        }
 
         <div className='col text-center highlight'>
           <Link to={'/aboutpage'} className="text-white text-decoration-none d-flex flex-column align-items-center">

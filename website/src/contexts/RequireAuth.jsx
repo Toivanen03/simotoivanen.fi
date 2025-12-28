@@ -1,13 +1,14 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
+import Spinner from '../middleware/spinner'
 
 const RequireAuth = ({ children }) => {
   const { isLoggedIn, isLoading } = useContext(AuthContext)
   const location = useLocation()
 
   if (isLoading) {
-    return <p>Ladataan käyttäjätietoja...</p>
+    return <Spinner text={"Ladataan käyttäjätietoja..."} />
   }
 
   if (!isLoggedIn) {
