@@ -8,9 +8,11 @@ import { Node, JS, TS, HTML, CSS, Docker, Python, Bootstrap, React } from '../as
 import { useEffect } from 'react'
 import Spinner from '../middleware/spinner'
 import ErrorDiv from '../middleware/errorDiv'
+import { useState } from 'react'
 
 const Home = ({ isMobile }) => {
   const { loading, error, data, refetch } = useQuery(LATEST_BLOGS)
+  const [hover, setHover] = useState(false)
   const testUsernamePart1 = "test"
   const testUsernamePart2 = "simotoivanen"
   const testUsernameOtherParts = ["@", ".fi"]
@@ -19,8 +21,8 @@ const Home = ({ isMobile }) => {
     refetch()
   }, [])
 
-  if (loading) return <Spinner />
-  if (error) return <ErrorDiv error={error} refetch={refetch} />
+  if (loading) return <Spinner text={"Ladataan..."} />
+  if (error) return <ErrorDiv error={error ? error : "Virhe haettaessa blogien esikatselua."} refetch={refetch} />
   
   return (
     <div className="homeBg">
@@ -93,7 +95,67 @@ const Home = ({ isMobile }) => {
         </div>
 
         <div className='row justify-content-center text-center glow'>
-          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
+          <div className="col-md-5 mt-5 d-flex align-items-stretch">
+            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title">Päiväkoti Pirtti</h5>
+                <h6 className="card-subtitle mb-2 text-muted text-start p-1"><i>"Simo Toivanen aloitti projektin tutustumalla päiväkodin vanhoihin nettisivuihin ja somealustoihin. Uusia nettisivuja ohjelmoidessaan hän piti päiväkodin johtajaa hyvin kartalla etenemisestä ja osasi selittää siihen liittyviä asioita ymmärrettävästi ja kärsivällisesti. Simo on oma-aloitteinen, mutta kysyi hyvin myös palautetta ja teki ulkoasuun liittyen pyydettyjä muutoksia. Hän teki hyviä ehdotuksia ja selvitti eri mahdollisuuksia toteutukseen liittyen. Lopputulos on selkeä, kohderyhmälle soveltuva kokonaisuus. Nettisivujen ylläpito vaikuttaa riittävän yksinkertaiselle myös asioista vähän ymmärtävälle ja Simo on palvelualttiisti luvannut auttaa nettisivujen ylläpidossa myös jatkossa. Ns. maallikon silmin nettisivut valmistuivat hämmästyttävän nopeasti!"</i></h6>
+                <h6 className="card-subtitle mb-2 text-muted text-start mt-2 mb-2">- Ronja Tarkiainen,<br /><span className='ms-2'>Päiväkodin johtaja</span></h6>
+                <img
+                  src="./src/assets/pkpirttiry.png"
+                  alt="Kuvakaappaus päiväkoti Pirtin etusivusta"
+                  className="img-fluid rounded border mb-4"
+                  style={{ objectFit: "cover" }}
+                />
+                <div className="mt-auto">
+                  <a
+                    href="https://pkpirttiry.fi"
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Tutustu
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-5 mt-5 d-flex align-items-stretch">
+            <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
+              <div className="card-body text-center d-flex flex-column">
+                <h5 className="card-title">Lifeline</h5>
+                <h6 className="card-subtitle mb-2 text-muted mt-2">Mobiilisovellus perhearjen helpottamiseksi.</h6>
+                <h6 className="card-subtitle mb-2 text-muted mt-3 mb-5">Kuvakaappaus on sovelluksen web-hallintapaneelista. Voit tutustua lähdekoodiin Githubissa klikkaamalla alla olevaa painiketta.</h6>
+                <img
+                  src="./src/assets/lifeline.png"
+                  alt="Kuvakaappaus Lifeline-sovelluksen web-hallintapaneelista."
+                  className="img-fluid rounded border mb-4"
+                  style={{
+                    objectFit: "cover",
+                    transform: hover ? "scale(1.5)" : "scale(1)",
+                    transition: "transform 0.3s ease",
+                  }}
+                  onMouseOver={() => setHover(true)}
+                  onMouseOut={() => setHover(false)}
+                />
+                <div className="mt-auto">
+                  <a
+                    href="https://github.com/Toivanen03/Lifeline"
+                    className="btn btn-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Tutustu
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='row justify-content-center text-center glow'>
+          <div className="col-md-5 mt-5 d-flex align-items-stretch">
             <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
               <div className="card-body text-center d-flex flex-column">
                 <h5 className="card-title">Maisemanavigaattori</h5>
@@ -118,7 +180,7 @@ const Home = ({ isMobile }) => {
             </div>
           </div>
 
-          <div className="col-12 col-md-4 mt-5 d-flex align-items-stretch">
+          <div className="col-md-5 mt-5 d-flex align-items-stretch">
             <div className="card shadow-sm mb-4 w-100 h-100 d-flex flex-column">
               <div className="card-body text-center d-flex flex-column">
                 <h5 className="card-title">Pong</h5>
