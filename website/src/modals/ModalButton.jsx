@@ -1,9 +1,11 @@
 import { Modal } from 'bootstrap'
 import cv from '../files/CV_Simo_Toivanen.pdf'
+import sert from '../files/Fullstackopen-sertifikaatit_Simo_Toivanen.pdf'
+import tod from '../files/Tutkintotodistus-Simo_Toivanen-kopio.pdf'
 
 function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled = false, isMobile }) {
-  const buttonType = action.startsWith('del') ? 'btn-danger' : 'btn-primary'
-  const buttonWidth = isMobile ? '30vw' : '10vw'
+  const buttonType = action.startsWith('del') ? 'btn-danger' : ['sert', 'tod', 'cv'].some(prefix => action.startsWith(prefix)) ? 'btn-info' : 'btn-primary'
+  const buttonWidth = isMobile ? '40vw' : '10vw'
 
   const handleClick = () => {
     if (disabled) return
@@ -33,7 +35,7 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
         action === 'info' ? modal.show() : modal.hide()
         break
       }
-      case 'cv':
+      case 'cv', 'sert', 'tod':
         return
       default:
         console.warn(`Tuntematon toiminto: ${action}`)
@@ -42,7 +44,34 @@ function ModalButton({ action, label, updateUser, setConfirmTitle, id, disabled 
 
   if (action === 'cv') {
     return (
-      <a className="btn btn-primary mt-3 mx-2" href={cv} download style={{width: buttonWidth}}>
+      <a className={`btn mt-3 mx-2 ${buttonType}`}
+        href={cv}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{width: buttonWidth, border: '1px solid black'}}>
+        {label}
+      </a>
+    )
+  }
+
+  if (action === 'sert') {
+    return (
+      <a className={`btn mt-3 mx-2 ${buttonType}`}
+        href={sert}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{width: buttonWidth, border: '1px solid black'}}>
+        {label}
+      </a>
+    )
+  }
+
+  if (action === 'tod') {
+    return (
+      <a className={`btn mt-3 mx-2 ${buttonType}`}
+        href={tod}
+        target="_blank"
+        rel="noopener noreferrer" style={{width: buttonWidth, border: '1px solid black'}}>
         {label}
       </a>
     )

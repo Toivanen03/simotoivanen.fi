@@ -46,25 +46,12 @@ const Home = ({ isMobile }) => {
                 joissa voin hyödyntää analyyttistä ajattelukykyäni, ongelmanratkaisutaitojani sekä <strong>jatkuvaa haluani oppia uutta!</strong>
                 </p>
               </span>
-              {!isMobile ? (
-                <div className='row'>
-                  <div className="col-4">
-                    <ModalButton action="info" label="Faktoja minusta" isMobile />
-                  </div>
-                  <div className="col-4">
-                    <ModalButton action="cv" label='Lataa CV' isMobile />
-                  </div>
+
+              <div className='row'>
+                <div className={isMobile ? "col-6" : "col-4"}>
+                  <ModalButton action="info" label={isMobile ? "Minusta" : "Lue lisää"} isMobile />
                 </div>
-              ) : (
-                <div className='row'>
-                  <div className="col-6">
-                    <ModalButton action="info" label="Minusta" isMobile />
-                  </div>
-                  <div className="col-6">
-                    <ModalButton action="cv" label='Lataa CV' isMobile />
-                  </div>
-                </div>
-                )}
+              </div>
             </div>
 
             <div className="col-md-4 mt-4 mb-3 d-flex justify-content-center">
@@ -77,7 +64,7 @@ const Home = ({ isMobile }) => {
             </div>
           </div>
 
-          <div className='row d-flex mt-5 mx-auto' style={{ maxWidth: '95%' }}>
+          <div className='row d-flex mt-3 mx-auto' style={{ maxWidth: '95%' }}>
             <p>Tämänhetkistä osaamistasoani kuvastaa ehkä parhaiten <a href="/aboutpage">tämä sivusto</a>, opinnäytetyönä tekemäni <a href="https://www.pkpirttiry.fi/" target="_blank" rel="noopener noreferrer">päiväkoti Pirtin</a> verkkosivusto sekä kehitteillä oleva <a href="https://github.com/Toivanen03/Lifeline" target="_blank" rel="noopener noreferrer">Lifeline</a> -projektini.</p>
             <p>Voit tutustua sivuston teknisiin ratkaisuihin laajemmin kirjautumalla sisään testitunnuksilla.</p>
             <ul>
@@ -89,7 +76,7 @@ const Home = ({ isMobile }) => {
           </div>
         </div>
 
-                <div className='row mt-5'></div>
+        <div className='row mt-5'></div>
 
         <div className='row mt-5 glow'>
           <div className='col-12 col-md-4 d-flex justify-content-center'>
@@ -271,7 +258,7 @@ const Home = ({ isMobile }) => {
           </div>
         </div>
       </div>
-      <InfoModal isMobile />
+      <InfoModal isMobile={isMobile} />
     </div>
   )
 }
