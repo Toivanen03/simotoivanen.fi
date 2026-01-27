@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap');
+@media screen and (max-width: 1023px) and (orientation: portrait) {
+
+    :root {
+        --teksti: #333333;
+        --tausta: #f6e1f8;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Poppins', 'sans-serif';
+        background-color: var(--tausta);
+        color: var(--teksti);
+    }
+
+    .btn-primary {
+        background-color: white;
+        border-color: var(--teksti);
+        color: var(--teksti);
+    }
+
+    .btn-primary:active {
+        background-color: lightgray !important;
+        border-color: var(--teksti) !important;
+        color: var(--tausta) !important;
+    }
+
+    main {
+        flex-grow: 1;
+        padding: 2px;
+    }
+
+    header {
+        display: none;
+    }
+
+    .header-mobile {
+        position: fixed;
+        width: 100%;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .footer-mobiili {
+        padding: 0%;
+        margin: 0%;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 24vh;
+        font-size: smaller;
+    }
+
+
+    /*     PELIALUEEN POHJAMUOTOILUT     */
+
+
+
+    .boksi {
+        margin: auto;
+        width: 95%;
+        height: auto;
+        justify-content: center;
+        border: 6px outset lightgray;
+        align-items: center;
+        text-align: center;
+        background-color: white;
+        z-index: 9999;
+    }
+
+    .fontti {
+        margin: auto;
+        background: linear-gradient(to right, indigo, blue, green, orange, red);
+        font-size: smaller;
+        -webkit-background-clip: text;
+        font-family: 'Comic Neue';
+        font-weight: bolder;
+        background-clip: text;
+        color: transparent;
+        text-align: center;
+    }
+
+    canvas {
+        width: 100%;
+        margin-top: 15vh;
+        margin-bottom: 2vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(40, 190, 40);
+    }
+
+    #messageBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+
+
+@media screen and (max-width: 1023px) and (orientation: landscape) {
+
+                    /*     PÄÄMUOTOILUT     */
+
+    :root {
+        --teksti: #333333;
+        --tausta: #f6e1f8;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: 'Poppins', 'sans-serif';
+        background-color: var(--tausta);
+        color: var(--teksti);
+    }
+
+    main {
+        flex-grow: 1;
+        padding: 0;
+}
+
+
+
+
+                    /*     HEADER, FOOTER ym. MUOTOILUT     */
+
+    .btn-primary {
+        background-color: white;
+        border-color: var(--teksti);
+        color: var(--teksti);
+    }
+
+    .btn-primary:active {
+        background-color: lightgray !important;
+        border-color: var(--teksti) !important;
+        color: var(--tausta) !important;
+    }
+
+
+    header {
+        display: none;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .header-mobile {
+        position: fixed;
+        width: 100%;
+    }
+
+    .footer-mobiili {
+        display: none;
+    }
+
+
+
+
+                    /*     PELIALUEEN POHJAMUOTOILUT     */
+
+    canvas {
+        position: absolute;
+        top: 24vh;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(40, 190, 40);
+    }
+
+    #messageBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .boksi {
+        margin: auto;
+        width: 46vw;
+        height: auto;
+        margin-top: 10vh;
+        display: flex;
+        justify-content: center;
+        box-shadow: 30px 30px 10px rgba(0, 0, 0, 0.4);
+        border: 4px outset lightgray;
+        align-items: center;
+        text-align: center;
+        background-color: white;
+        z-index: 9999;
+    }
+
+    .fontti {
+        margin: auto;
+        background: linear-gradient(to right, indigo, blue, green, orange, red);
+        font-size: 18px;
+        -webkit-background-clip: text;
+        font-family: 'Comic Neue';
+        font-weight: bolder;
+        background-clip: text;
+        color: transparent;
+        text-align: center;
+    }
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <link rel="canonical" href="https://simotoivanen.fi/old-exercises/Hedelmapeli/slots.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hedelmäpeli</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="description" content="Hedelmäpeli">
+    <meta property="og:image" content="img/slots.png">
+    <meta property="og:title" content="Simo Toivanen - Hedelmäpeli Javascriptillä">
+    <meta property="og:description" content="Simo Toivanen - Hedelmäpeli Javascriptillä">
+    <meta property="og:url" content="https://simotoivanen.fi/old-exercises/Hedelmapeli/slots.html">
+    <link href="/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 1023px)" href="css/mobiili.css">
+</head>
+
+<body>
+    <audio src="Aanet/coin.mp3" id="voittoAani" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>
+    <audio src="Aanet/fanfare.mp3" id="pankkiAani" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>
+    <audio src="Aanet/wahwah.mp3" id="gameOverAani" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>
+    <audio src="Aanet/jackpot.mp3" id="jackPotAani" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>
+    <audio src="Aanet/xplode.mp3" id="pam" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>
+
+<main> 
+    <div class="pc">
+        <h2 class="fontti">Hedelmäpeli</h2>
+            
+        <div class="container pelialue" style="background-image: url('img/pohja.jpg');">
+
+            <div class="justify-content-center">
+                <div id="peliLoppu">
+                    <h3 class="fontti">Game Over</h3>
+                    <br>
+                    <p></p>
+                    <div class="d-flex justify-content-center">
+                        <span id="viesti" class="fontti viesti"><b></b></p>
+                    </div><br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary mx-1 fontti" onClick="window.location.reload();">Jees.</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-center">
+                <div id="voittotalletus">
+                    <h3 class="fontti">Voitonmaksu</h3>
+                    <br>
+                    <p></p>
+                    <div class="d-flex justify-content-center">
+                        <span id="maksuviesti" class="fontti viesti"><b></b></p>
+                    </div><br>
+                    <div class="d-flex justify-content-center">
+                        <button id="voittotalletusUusiPeli" class="btn btn-primary mx-1 fontti" onclick="voitonmaksu('alku')">Aloita alusta</button>
+                        <button id="voittotalletusSulje" class="btn btn-primary mx-1 fontti" onclick="voitonmaksu('sulje')">Sulje</button>                        
+                    </div>
+                </div>
+            </div> 
+
+            <div class="justify-content-center">
+                <div id="ohjeLaatikko">
+                    <h3 class="fontti">Hedelmäpelin ohjeet</h3>
+                    <br>
+                    <p></p>
+                    <div class="d-flex justify-content-center">
+                        <p class="fontti viesti"><b>Jokainen tyhjäksi arvottu kierros<br>kasvattaa Jackpotin kerrointa.<br><br>Ei tässä pelissä muita neuvoja kaivata.<br>Panosta ja pelaa.<br><br>Mukavia pelihetkiä!</b></p>
+                    </div><br>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-primary mx-1 fontti" onclick="suljeOhje()">Sulje</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coinbox">
+
+                <div class="row voittotaulukkoMobiili">
+                    <img src="img/voittotaulukko.png" class="voittotaulukko" alt="voitonmaksutaulukko">
+                    <span id="winMobiili"></span>
+                </div>
+
+                <div class="row tulosruutu" style="background-image: url('img/rahat.png');">
+                    <div class="col-2" id="panos">
+                        <span id="panosEkaNro"></span>
+                        <span id="panosTokaNro"></span>
+                    </div>
+                    <div class="col-2" id="viimeisinVoitto">
+                        <span id="viimVoittoEkaNro"></span>
+                        <span id="viimVoittoTokaNro"></span>
+                        <span id="viimVoittoKolmasNro"></span>
+                    </div>
+                    <div class="col-2" id="voitot">
+                        <span id="voitotEkaNro"></span>
+                        <span id="voitotTokaNro"></span>
+                        <span id="voitotKolmasNro"></span>
+                    </div>
+                    <div class="col-2" id="pelivaraukset">
+                        <span id="varauksetEkaNro"></span>
+                        <span id="varauksetTokaNro"></span>
+                    </div>
+                </div>
+
+                <div class="row voittotaulukkoDesktop">
+                    <img src="img/voittotaulukko.png" class="voittotaulukko" alt="voitonmaksutaulukko">
+                    <span id="win"></span>
+                </div>
+
+            </div>
+
+            <div class="kelatJaPainikkeet">
+                <div class="row kelat">
+                    <div class="col d-flex" id="ekaKela">
+                        <span id="kela1"></span>
+                    </div>
+                    <div class="col d-flex" id="tokaKela">
+                        <span id="kela2"></span>
+                    </div>
+                    <div class="col d-flex" id="kolmasKela">
+                        <span id="kela3"></span>
+                    </div>
+                    <div class="col d-flex" id="neljasKela">
+                        <span id="kela4"></span>
+                    </div>
+                </div>
+
+                <div class="nappula-alue">
+                    <div class="row">
+                        <div class="col d-flex align-items-center">
+                            <img id="ohjepainike" class="ohje" src="img/ohjeet.png" onclick="ohjeet()">
+                        </div>
+                        <div class="col d-flex align-items-center lukot">
+                            <span id="lukko1" onclick="lukitse1()"></span>
+                        </div>
+                        <div class="col d-flex align-items-center lukot">
+                            <span id="lukko2" onclick="lukitse2()"></span>
+                        </div>
+                        <div class="col d-flex align-items-center lukot">
+                            <span id="lukko3" onclick="lukitse3()"></span>
+                        </div>
+                        <div class="col d-flex align-items-center lukot">
+                            <span id="lukko4" onclick="lukitse4()"></span>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <img id="panosPainike" class="panos" src="img/panos.png" onclick="asetaPanos()">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 2vh; margin-top: 1vh;">
+                        <div class="col d-flex align-items-center nappulat">
+                            <img id="voitonmaksupainike" class="voitonmaksu" src="img/voitonmaksu.png" onclick="voitonmaksu()">
+                        </div>
+                        <div class="col d-flex align-items-center nappulat">
+                            <span class="ekaTyhjaVali"></span>
+                        </div>
+                        <div class="col d-flex align-items-center nappulat">
+                            <span class="tokaTyhjaVali"></span>
+                        </div>
+                        <div class="col d-flex align-items-center nappulat">
+                            <span class="kolmasTyhjaVali"></span>
+                        </div>
+                        <div class="col d-flex align-items-center nappulat divStartNappi">
+                            <img id="kaynnista" class="startNappi" src="img/start.png" onclick="start()">
+                        </div>
+                    </div>          
+                </div>
+            </div>
+            <script src="slots.js"></script>
+        </div>
+    </div>
+</main>
+
+    <div class="mobiiliPysty">
+        <h1 class="fontti">Hedelmäpeli</h1>
+            
+        <div class="pelialue" style="background-image: url(img/pohja.jpg);">
+            <p  class="fonttiValkoinen" style="margin-top: 5%; margin-left: 25%; margin-right: 25%;">Käännä laite vaakatasoon pelataksesi.</p>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

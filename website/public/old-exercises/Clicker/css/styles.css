@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap');
+@media screen and (min-width: 1024px) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 2vw;
+    }
+
+    .gamearea {
+        background-color: white;
+        border-style: inset;
+        border-width: 8px;
+        border-color: darkgrey;
+        padding: 0;
+        margin-bottom: 15vh;
+    }
+
+    .gameheader {
+        padding: 1%;
+        background-color: var(--tumma);
+        color: var(--vaalea);
+    }
+      
+    .ossiHead:hover {
+        cursor: crosshair;
+    }
+    
+    .ossiHead:active {
+        cursor: crosshair;
+    }
+
+    #ossiKuvaMobiiliVaaka {
+        display: none;
+    }
+
+    #ossiKuvaMobiili {
+        display: none;
+    }
+
+    .alueMobiili {
+        display: none;
+    }
+
+    .tulokset {
+        margin-top: 5vh;
+    }
+
+    #tulokset img {
+        user-select: none;
+    }
+
+    .nollaus {
+        margin-top: 5vh;
+    }
+
+    label {
+        font-size: smaller;
+    }
+
+    .mOnBtn {
+        margin-left: 3vw;
+    }
+
+    .eOnBtn {
+        margin-left: 4vw;
+    }
+
+    .alarivi {
+        margin-top: 30vh;
+    }
+
+    .mobile-volume {
+        display: none;
+    }
+
+    @keyframes moveUp {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-50px);
+        }
+        100% {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+    }
+    
+    .animaatio {
+        animation: moveUp 2s ease-out;
+    }
+
+    .piilotettu {
+        display: none;
+    }
+
+    .kolikot img {
+        height: 60px;
+    }
+
+    .saavutusSelain {
+        margin-top: -60vh;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: 9999;
+    }
+    
+    #saavutusLaatikkoSelain {
+        border-style: solid;
+        border-width: 5px;
+        border-color: navy;
+        transform: translate(-50%, -50%);
+        width: auto;
+        background-color: lightskyblue;
+        padding: 10px;
+        text-align: center;
+        display: none;
+    }
+
+    #startGame {
+        border-style: solid;
+        border-width: 5px;
+        border-color: navy;
+        transform: translate(-50%, -50%);
+        width: auto;
+        background-color: lightskyblue;
+        padding: 10px;
+        text-align: center;
+        display: block;
+    }
+
+    #SaavutusLaatikkoMobiili {
+        display: none;
+    }
+    
+    #saavutusLaatikkoSelain #suljeSelain {
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+        width: 25px;
+        height: 25px;
+    }
+
+    .saavutusMobiili {
+        display: none;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 100;
+        }
+        50% {
+            opacity: 50;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    
+    .feidaus {
+        animation: fadeOut 20s ease-out;
+    }
+
+    .mobiili {
+        display: none;
+    }
+
+    .fontti {
+        background: linear-gradient(to right, indigo, blue, green, orange, red);
+        -webkit-background-clip: text;
+        font-family: 'Comic Neue', cursive;
+        font-size: larger;
+        font-weight: bolder;
+        text-align: left;
+        background-clip: text;
+        color: transparent;
+    } 
+}

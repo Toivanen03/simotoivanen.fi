@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <link rel="canonical" href="https://simotoivanen.fi/old-exercises/Clicker/clicker.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideologisesti työtön Ossi Nyman</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="description" content="Ideologisesti työtön">
+    <meta name="keywords" content="Ossi Nyman, Alma Tuuva, Ossi, Nyman, Alma, Tuuva, ideologia, ideologisesti, työtön, ideologisesti työtön, pummi, kela, sossu, sossupummi, peli, clicker">
+    <meta property="og:image" content="img/ossi.png">
+    <meta property="og:url" content="https://simotoivanen.fi/old-exercises/Clicker/clicker.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 1023px)" href="css/mobiili.css">
+</head>
+
+<body>
+    <audio src="tuplaus.mp3" autoplay loop id="taustamusiikki" type="audio/mpeg">                                             
+        Selain ei tue äänitunnisteita.
+    </audio>
+    <audio src="coin.mp3" id="coin" type="audio/mpeg">
+        Selain ei tue äänitunnisteita.
+    </audio>  
+
+<main> 
+    <h2>OssiClicker</h2>
+    <br>
+<!-- Container sitoo koko pelialueen -->
+    <div class="container gamearea">
+        <h3 class="gameheader">Klikkaa ideologisesti työtöntä ja nosta tukia!</h3>
+        <br>
+        <div class="row">
+<!-- Työpöytäselaimen map -->
+            <div class="col-6 d-flex" id="tausta">
+                <div class="alue">
+                    <img id="ossiKuvaSelain" width="100%" height="auto" src="img/ossi.png" alt="Ideologisesti työtön Ossi Nyman" usemap="#ossiMapSelain">
+                    <div class="ossiHead">
+                        <map name="ossiMapSelain">
+                            <area shape="circle" coords="450%, 295%, 70%" onclick="clickOssi()">
+                        </map>
+                    </div>
+                </div>
+<!-- Mobiililaitteen pystynäkymälle map -->
+                <div class="alueMobiili">
+                    <img id="ossiKuvaMobiili" width="100%" height="auto" src="img/ossi.png" alt="Ideologisesti työtön Ossi Nyman" usemap="#ossiMapMobiili">
+                    <div class="ossiHead">
+                        <map name="ossiMapMobiili">
+                            <area shape="circle" coords="94%, 64%, 16%" onclick="clickOssi()">
+                        </map>
+                    </div>
+                </div>
+<!-- Mobiililaitteen vaakanäkymälle map -->
+                <div class="alueMobiiliVaaka">
+                    <img id="ossiKuvaMobiiliVaaka" width="100%" height="auto" src="img/ossi.png" alt="Ideologisesti työtön Ossi Nyman" usemap="#ossiMapMobiiliVaaka">
+                    <div class="ossiHead">
+                        <map name="ossiMapMobiiliVaaka">
+                            <area shape="circle" coords="185%, 105%, 35%" onclick="clickOssi()">
+                        </map>
+                    </div>
+                </div>
+            </div>
+<!-- Pelialueen viereinen pääkolumni -->
+    <!-- Pyörivät euromerkit -->
+            <div class="col-6" id="tulokset">
+                <div class="row kolikot">
+                    <div class="col-12 d-flex justify-content-center">
+                        <img src="img/euro_rotating.gif" id="ege1">
+                        <img src="img/euro_rotating.gif" id="ege2">
+                        <img src="img/euro_rotating.gif" id="ege3">
+                        <img src="img/euro_rotating.gif" id="ege4">
+                        <img src="img/euro_rotating.gif" id="ege5">                    
+                    </div>
+                </div>
+    <!-- Pistenäyttö, työpöytäselain -->
+                <div class="row tulokset">
+                    <div class="col-12 d-flex justify-content-center">
+                        <span id="miljardit"></span>
+                        <span id="sadatmillit"></span>
+                        <span id="kymppimillit"></span>
+                        <span id="miljoonat"></span>
+                        <span id="sadattonnit"></span>
+                        <span id="kymppitonnit"></span>
+                        <span id="tuhannet"></span>
+                        <span id="sadat"></span>
+                        <span id="kympit"></span>
+                        <span id="ykköset"></span>
+                    </div>
+                </div>
+<!-- Seuraava container sitoo alemmat alueet -->
+    <!-- Ensimmäisenä pisteiden nollauspainike -->
+                <div class="container">
+                    <div class="row text-center">                                        
+                        <div class="nollaus"> 
+                            <button onclick="nollaaPisteet()" class="fontti">Nollaa pisteet</button>                               
+                        </div>
+                    </div>
+                    <div class="col d-flex align-items-center mobiili">
+                        <div class="sulkuNappi mobiili">
+                            <button onclick="nollaaPisteet()" class="fontti">Nollaa pisteet</button>                               
+                        </div>
+                    </div>
+<!-- Tehdään oma div-elementti näytön alareunaan siirrettäville osille -->
+    <!-- Äänisäätimien otsikot omalla rivillään -->
+                    <div class="alarivi desktop-volume">
+                        <div id="musiikki" class="musiikki">
+                            <div class="row fontti">
+                                <div class="col-6 text-center justify-content-center">
+                                    <h6><strong>Musiikki:</strong></h6>
+                                </div>
+                                <div class="col-6 text-center justify-content-center">
+                                    <h6><strong>Tehosteet:</strong></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+    <!-- Seuraavalla rivillä äänenvoimakkuuksien radiopainikkeet -->
+                            <div class="col-6">
+        <!-- Rivi jaetaan kahteen kolumniin radiopainikkeiden sijoittelemiseksi -->
+                                <div class="row">
+            <!-- Puolikkaan näytön rivin kolumnit jaetaan vielä kolmeen osaan -->
+                                    <div class="col-4">
+                                        <input type="radio" id="musiikkiLo" name="mVolume" value="musiikkiLo" onchange="mVoimakkuus(0.2)" checked>
+                                        <label for="musiikkiLo" class="radioBtn">Matala</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="radio" id="musiikkiMid" name="mVolume" value="musiikkiMid" onchange="mVoimakkuus(0.6)">
+                                        <label for="musiikkiMid" class="radioBtn">Normaali</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="radio" id="musiikkiFull" name="mVolume" value="musiikkiFull" onchange="mVoimakkuus(1)">
+                                        <label for="musiikkiFull" class="radioBtn">Täysi</label>
+                                    </div>     
+                                </div>                               
+                            </div>
+            <!-- Sama toistetaan vielä ääniefektin painikkeille -->
+                            <div class="col-6">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <input type="radio" id="efektiLo" name="eVolume" value="efektiLo" onchange="eVoimakkuus(0.2)" checked>
+                                        <label for="efektiLo" class="radioBtn">Matala</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="radio" id="efektiMid" name="eVolume" value="efektiMid" onchange="eVoimakkuus(0.6)">
+                                        <label for="efektiMid" class="radioBtn">Normaali</label>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="radio" id="efektiFull" name="eVolume" value="efektiFull" onchange="eVoimakkuus(1)">
+                                        <label for="efektiFull" class="radioBtn">Täysi</label>
+                                    </div>     
+                                </div>                                   
+                            </div>
+                        </div>
+        <!-- Viimeisellä rivillä mykistyspainikkeet -->
+                        <div class="row">                                        
+                            <div class="col text-center"> 
+                                <input type="checkbox" id="musiikkiPäällä" onchange="mykistäMusiikki('desktop')"> 
+                                <label for="musiikkiPäällä" style="margin-left: 1vw;">Vaienna musiikki</label>
+                            </div>
+                            <div class="col text-center">
+                                <input type="checkbox" id="efektitPäällä" onchange="mykistäEfektit('desktop')"> 
+                                <label for="efektitPäällä" style="margin-left: 1vw;">Vaienna äänet</label>                                 
+                            </div>
+                        </div>
+                    </div>  <!-- "Alarivi" -elementin sulkeva div -->
+                </div>  <!-- Sisemmän containerin sulkeva div -->
+<!-- Tervetuloa -->
+                <div class="row saavutusSelain" style="height: 100vh; display: flex; align-items: center;">
+                    <div id="startGame" style="height: 20vh; width: 30vw" class="mb-5">
+                        <div class="mt-4">
+                            <span id="welcome"><strong>Tervetuloa peliin</strong>
+                                <p class="mt-4">Klikkaile Kelan tukia itsellesi ja elä unelmaasi!</p>
+                            </span>
+                        </div>
+                        <div class="mt-5">    
+                            <button id="welcomeButton" onclick="ok()" style="bottom: 0">Aloita peli</button>
+                        </div>
+                    </div>   
+                </div>
+<!-- Saavutusikkuna, työpöytä -->
+                <div class="row saavutusSelain">
+                    <div id="saavutusLaatikkoSelain" class="piilotettu feidaus">
+                        <span id="saavutusTekstiSelain" style="margin-bottom: 1vw;"><strong>Virstanpylväs saavutettu!</strong></span>
+                        <img id="suljeSelain" src="img/close.png" alt="Sulje" onclick="suljeSaavutusSelain()">
+                        <p class="fontti" id="selosteSelain"></p>
+                    </div>
+                </div>
+<!-- Saavutusikkuna, mobiililaitteet -->
+                <div class="row saavutusMobiili">
+                    <div class="col d-flex">
+                        <div id="saavutusLaatikkoMobiili" class="piilotettu varjo feidaus">
+                            <span id="saavutusTekstiMobiili" style="margin-bottom: 1vw;"><b>Virstanpylväs saavutettu!</b></span>
+                            <img id="suljeMobiili" src="img/close.png" alt="Sulje" onclick="suljeSaavutusMobiili()" style="margin-left: 2vw;">
+                            <p></p>
+                            <p class="fontti" id="selosteMobiili"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>  <!-- Pelialueen oikean puolikkaan sulkeva div -->
+
+<!-- Mobiilinäkymän volumesijoittelut -->
+            <div class="mobile-volume">
+    <!-- Mobiilinäkymän volumeotsikot -->
+                <div class="row fontti">
+                    <div class="col-6 text-center justify-content-center">
+                        <h6>Musiikki:</h6>
+                    </div>
+                    <div class="col-6 text-center justify-content-center">
+                        <h6>Tehosteet:</h6>
+                    </div>
+                </div>
+                <div class="row" style="width: 100%;">
+        <!-- Seuraavalla rivillä äänenvoimakkuuksien radiopainikkeet -->
+                    <div class="col-6">
+            <!-- Rivi jaetaan kahteen kolumniin radiopainikkeiden sijoittelemiseksi -->
+                        <div class="row" style="margin-left: 1vw;">
+            <!-- Puolikkaan näytön rivin kolumnit jaetaan vielä kolmeen osaan -->
+                            <div class="col-4">
+                                <input type="radio" id="musiikkiLo" name="mVolumeM" value="musiikkiLo" onchange="mVoimakkuus(0.2)" checked>
+                                <label for="musiikkiLo" class="radioBtn">Matala</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="musiikkiMid" name="mVolumeM" value="musiikkiMid" onchange="mVoimakkuus(0.6)">
+                                <label for="musiikkiMid" class="radioBtn">Keski</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="musiikkiFull" name="mVolumeM" value="musiikkiFull" onchange="mVoimakkuus(1)">
+                                <label for="musiikkiFull" class="radioBtn">Täysi</label>
+                            </div>     
+                        </div>                               
+                    </div>
+            <!-- Sama toistetaan vielä ääniefektin painikkeille -->
+                    <div class="col-6">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="radio" id="efektiLo" name="eVolumeM" value="efektiLo" onchange="eVoimakkuus(0.2)" checked>
+                                <label for="efektiLo" class="radioBtn">Matala</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="efektiMid" name="eVolumeM" value="efektiMid" onchange="eVoimakkuus(0.6)">
+                                <label for="efektiMid" class="radioBtn">Keski</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="radio" id="efektiFull" name="eVolumeM" value="efektiFull" onchange="eVoimakkuus(1)">
+                                <label for="efektiFull" class="radioBtn">Täysi</label>
+                            </div>     
+                        </div>                                   
+                    </div>
+                </div>
+    <!-- Viimeisellä rivillä mykistyspainikkeet -->
+                <div class="row" style="margin-left: 4vw;">                                        
+                    <div class="col d-flex align-items-center mOnBtn"> 
+                        <input type="checkbox" id="musiikkiPäälläMobiili" onchange="mykistäMusiikki('mobiili')"> 
+                        <label for="musiikkiPäälläMobiili" style="margin-left: 2vw;">Vaienna musiikki</label>
+                    </div>
+                    <div class="col d-flex align-items-center eOnBtn">
+                        <input type="checkbox" id="efektitPäälläMobiili" onchange="mykistäEfektit('mobiili')"> 
+                        <label for="efektitPäälläMobiili" style="margin-left: 2vw;">Vaienna äänet</label>                                 
+                    </div>
+                </div>
+            </div>  <!-- "mobilevolume" -elementin sulkeva div -->
+
+        </div>  <!-- Pelialueen päärivin sulkeva div -->
+    </div>  <!-- Pelialueen pääcontainerin sulkeva div -->
+
+    <script src="clicker.js"></script>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <link rel="canonical" href="https://simotoivanen.fi/old-exercises/Pong/pong.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <meta name="description" content="Legendaarinen klassikkopeli Pong">
+    <meta property="og:image" content="/old-exercises/Pong/img/pong.png">
+    <meta property="og:title" content="Pong">
+    <meta property="og:description" content="Simo Toivanen - Pong JavaScriptillä ja CanvasAPIlla">
+    <meta property="og:url" content="https://simotoivanen.fi/old-exercises/Pong/pong.html">
+    <link href="/Bootstrap/bootstrap-5.3.3-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Bootstrap/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" media="screen and (min-width: 1024px)" href="css/styles.css">
+    <link rel="stylesheet" media="screen and (max-width: 1023px)" href="css/mobiili.css">
+
+</head>
+
+<body>
+
+<main>
+    <div class="row">
+        <div id="gameArea">
+            <audio src="audio/plip.mp3" id="plip" type="audio/mpeg">
+                Selain ei tue äänitunnisteita.
+            </audio>
+            <audio src="audio/ole.mp3" id="ole" type="audio/mpeg">
+                Selain ei tue äänitunnisteita.
+            </audio>
+            <audio src="audio/oops.mp3" id="oops" type="audio/mpeg">
+                Selain ei tue äänitunnisteita.
+            </audio>
+            <audio src="audio/yeah.mp3" id="yeah" type="audio/mpeg">
+                Selain ei tue äänitunnisteita.
+            </audio>
+            <audio src="audio/cry.mp3" id="cry" type="audio/mpeg">
+                Selain ei tue äänitunnisteita.
+            </audio>
+            <script src="pong.js"></script>
+        </div>
+        <div id="messageBox" class="row boksi">
+            <span id="message" class="fontti"></span>
+            <span id="button" class="fontti" onclick="location.reload();" style="margin-bottom: 1vh;"></span>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

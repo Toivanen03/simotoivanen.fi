@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@1,700&display=swap');
+@media screen and (max-width: 1023px) and (orientation: portrait){
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    h2 {
+        margin-left: 2vw;
+        font-size: medium;
+    }
+
+    h3 {
+        font-size: smaller;
+    }
+
+    .gamearea {
+        background-color: white;
+        border: 3px solid darkgrey;
+        padding: 0;
+        width: 94%;
+    }
+
+    .gameheader {
+        padding: 1%;
+        background-color: var(--tumma);
+        color: var(--vaalea);
+    }
+
+    .nollaus {
+        display: none;
+    }
+
+    .kolikot {
+        margin-top: -5vh;
+    }
+
+    .kolikot img{
+        height: 22px;
+    }
+      
+    #ossiKuvaMobiili {
+        margin-top: -4vh !important;
+    }
+
+    #ossiKuvaMobiiliVaaka {
+        display: none;
+    }
+
+    #ossiKuvaSelain {
+        display: none;
+    }
+
+    .alue {
+        display: none;
+    }
+
+    .ossiHead:hover {
+        cursor: crosshair;
+    }
+
+    .tulokset {
+        margin-bottom: 2vh;
+    }
+
+    .tulokset img {
+        height: 16px;
+        width: auto;
+    }
+
+    h6 {
+        font-size: 12px;
+        margin-top: 1vh;
+        margin-bottom: -0.5vh;
+    }
+
+    #tulokset {
+        user-select: none;
+    }
+
+    .nollaus {
+        margin-top: 5vh;
+    }
+
+    label {
+        font-size: 8px;
+    }
+
+    .desktop-volume {
+        display: none;
+    }
+
+    .radioBtn {
+        width: 1px;
+    }
+
+    input[type="radio"] {
+        width: 8px;
+        height: 8px;
+    }
+
+    @keyframes moveUp {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-50px);
+        }
+        100% {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+    }
+    
+    .animaatio {
+        animation: moveUp 2s ease-out;
+    }
+
+    .piilotettu {
+        display: none;
+    }
+    
+    #saavutusLaatikkoMobiili {
+        margin-top: 10vh;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-style: solid;
+        border-width: 2px;
+        border-color: navy;
+        background-color: lightskyblue;
+        padding: 1px;
+        text-align: center;
+        display: none;
+        z-index: 999;
+    }
+    
+    #saavutusLaatikkoMobiili #suljeMobiili {
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+        width: 20px;
+        height: 20px;
+    }
+
+    #saavutusLaatikkoSelain {
+        display: none;
+    }
+
+    .saavutusSelain {
+        display: none;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 100;
+        }
+        50% {
+            opacity: 50;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    
+    .feidaus {
+        animation: fadeOut 20s ease-out;
+    }
+
+    .sulkuNappi {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fontti {
+        background: linear-gradient(to right, indigo, blue, green, orange, red);
+        -webkit-background-clip: text;
+        font-family: 'Comic Neue', cursive;
+        font-size: 12px;
+        font-weight: bolder;
+        text-align: center;
+        background-clip: text;
+        color: transparent;
+    } 
+}     
+
+
+
+
+@media screen and (max-width: 1023px) and (orientation: landscape) {
+
+    :root {
+        --tumma: #333333;
+        --vaalea: rgb(229, 229, 229);
+    }
+
+    .kolikot {
+        display: none;
+    }
+      
+    #ossiKuvaMobiiliVaaka {
+        margin-top: -4vh !important;
+    }
+
+    #ossiKuvaMobiili {
+        display: none;
+    }
+
+    .alue {
+        display: none;
+    }
+
+    .ossiHead:hover {
+        cursor: crosshair;
+    }
+
+    .row .tulokset {
+        display: none;
+    }
+
+    #tulokset {
+        user-select: none;
+    }
+
+    #musiikki {
+        display: none;
+    }
+
+    #musiikki .fontti {
+        display: none;
+    }
+
+    #mobiiliPisteet {
+        font-size: 10px;
+    }
+
+    .musiikkiVolume {
+        display: none;
+    }
+
+    .selain {
+        display: none;
+    }
+
+    .efektiVolume {
+        display: none;
+    }
+
+    @keyframes moveUp {
+        0% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-50px);
+        }
+        100% {
+            transform: translateY(-100px);
+            opacity: 0;
+        }
+    }
+    
+    .animaatio {
+        animation: moveUp 2s ease-out;
+    }
+
+    .piilotettu {
+        display: none;
+    }
+    
+    #saavutusLaatikkoMobiili {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-style: solid;
+        border-width: 2px;
+        border-color: navy;
+        background-color: lightskyblue;
+        padding: 1px;
+        text-align: center;
+        display: none;
+        z-index: 999;
+    }
+    
+    #saavutusLaatikkoMobiili #suljeMobiili {
+        cursor: pointer;
+        float: right;
+        font-weight: bold;
+        width: 20px;
+        height: 20px;
+    }
+
+    #saavutusLaatikkoSelain {
+        display: none;
+    }
+
+    .saavutusSelain {
+        display: none;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 100;
+        }
+        50% {
+            opacity: 50;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    
+    .feidaus {
+        animation: fadeOut 20s ease-out;
+    }
+
+    .sulkuNappi {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .fontti {
+        background: linear-gradient(to right, indigo, blue, green, orange, red);
+        -webkit-background-clip: text;
+        font-family: 'Comic Neue', cursive;
+        font-size: 12px;
+        font-weight: bolder;
+        text-align: center;
+        background-clip: text;
+        color: transparent;
+    } 
+}     
