@@ -10,8 +10,8 @@ const UpdateNotice = ({ onClose }) => {
             <h5 className="modal-title"><strong>Simotoivanen.fi on päivitetty.</strong></h5>
           </div>
           <div className="modal-body">
-            <p>Tervetuloa uusitulle sivulleni! Sivusto on rakennettu täysin uudelleen moderneja web-sovelluskehitystekniikoita hyödyntäen.</p>
-            <p>Näet tämän ilmoituksen vain ensimmäisellä vierailullasi, mutta linkki sivuston tietoihin löytyy myös yläpalkista.</p>
+            <p>Tervetuloa sivustolleni, joka on rakennettu moderneja web-sovelluskehitystekniikoita, kuten React, Apollo Client ja GraphQL, Express, MongoDB sekä Bootstrap hyödyntäen.</p>
+            <p>Näet tämän ilmoituksen vain ensimmäisellä vierailullasi. Linkki sivuston tekniseen esittelyyn löytyy yläpalkista.</p>
             <p className="fs-4">Tervetuloa!</p>
           </div>
           <div className="modal-footer d-flex justify-content-center">
