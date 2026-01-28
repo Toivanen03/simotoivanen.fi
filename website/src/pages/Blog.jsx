@@ -7,7 +7,7 @@ import Spinner from '../middleware/spinner'
 import ErrorDiv from '../middleware/errorDiv'
 
 const ShareButtons = ({ id, title, iconSize }) => {
-  const blogUrl = `https://simotoivanen.fi/blog?id=${id}`
+  const blogUrl = `https://simotoivanen.fi/blog/${id}`
   const encodedUrl = encodeURIComponent(blogUrl)
   const encodedTitle = encodeURIComponent(title)
 
