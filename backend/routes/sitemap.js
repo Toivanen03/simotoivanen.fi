@@ -8,7 +8,7 @@ router.get('/sitemap.xml', async (req, res) => {
     const blogs = await Blog.find({})
 
     let urls = blogs.map(blog => {
-      return `<url><loc>https://simotoivanen.fi/blog/${blog.id}</loc></url>`
+      return `<url><loc>https://blogs.simotoivanen.fi/blog/${blog.id}</loc></url>`
     })
 
     const staticUrls = [
