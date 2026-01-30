@@ -12,7 +12,7 @@ const ShareButtons = ({ id, title, iconSize }) => {
   const encodedTitle = encodeURIComponent(title)
 
   const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`
-  const linkedinShare = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedTitle}`
+  const linkedinShare = `https://www.linkedin.com/shareArticle?&url=${encodedUrl}&title=${encodedTitle}`
   const whatsAppShare = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`
 
   const fb = (<FaFacebook color='#0866FF' size={iconSize}/>)

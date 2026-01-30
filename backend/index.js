@@ -14,6 +14,24 @@ import { passwordResetRoutes } from './routes/passwordReset.js'
 import { blogNotificationRouter } from './routes/blogNotification.js'
 import { sitemapRouter } from './routes/sitemap.js'
 
+const isBot = ua =>
+  /facebookexternalhit|Facebot|LinkedInBot|Twitterbot|Slackbot|Discordbot|WhatsApp|Googlebot/i.test(ua)
+
+const esc = s =>
+  String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+
+const trim = (text, len = 160) => {
+  if (!text) return ''
+  const t = text.replace(/\s+/g, ' ').trim()
+  if (t.length <= len) return t
+  return t.slice(0, len).replace(/\s+\S*$/, '') + '…'
+}
+
 async function checkForNewContent(lastCheck) {
   const newBlogs = await Blog.find({ createdAt: { $gt: lastCheck } }).countDocuments()
   return newBlogs > 0
@@ -31,7 +49,6 @@ app.use(express.json())
 app.use('/', sitemapRouter)
 app.use('/api', passwordResetRoutes)
 app.use('/api', blogNotificationRouter)
-app.use(express.static(join(__dirname, 'build')))
 
 app.use((req, res, next) => {
     const auth = req.headers.authorization
@@ -40,6 +57,44 @@ app.use((req, res, next) => {
     }
     next()
 })
+
+app.get('/blog/:id', async (req, res, next) => {
+  const ua = req.get('user-agent') || ''
+
+  if (!isBot(ua)) return next()
+
+    try {
+      const blog = await Blog.findById(req.params.id).lean()
+      if (!blog) return res.status(404).end()
+
+      const descriptionSource = blog.subtitle || blog.content || ''
+
+      const url = `https://simotoivanen.fi/blog/${blog._id}`
+
+      res.send(`
+      <!DOCTYPE html>
+      <html lang="fi">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <title>${esc(blog.title)}</title>
+        <link rel="canonical" href="${url}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="${esc(blog.title)}" />
+        <meta property="og:description" content="${esc(trim(descriptionSource))}" />
+        <meta property="og:image" content="https://simotoivanen.fi/img/blogImg.png" />
+        <meta property="og:url" content="${url}" />
+      </head>
+      <body></body>
+      </html>
+      `)
+  } catch (err) {
+    return res.status(404).end()
+  }
+})
+
+app.use(express.static(join(__dirname, 'build')))
 
 app.get('/api/check-new-content', async (req, res) => {
   try {
