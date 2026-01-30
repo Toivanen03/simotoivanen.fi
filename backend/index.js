@@ -44,7 +44,11 @@ dotenv.config()
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: ['https://blogs.simotoivanen.fi', 'https://lifeline.simotoivanen.fi', 'https://www.blogs.simotoivanen.fi', 'https://www.lifeline.simotoivanen.fi', 'https://simotoivanen.fi', 'https://www.simotoivanen.fi'],
+  credentials: true
+}))
+
 app.use(express.json())
 app.use('/', sitemapRouter)
 app.use('/api', passwordResetRoutes)
@@ -69,7 +73,7 @@ app.get('/blog/:id', async (req, res, next) => {
 
       const descriptionSource = blog.subtitle || blog.content || ''
 
-      const url = `https://simotoivanen.fi/blog/${blog._id}`
+      const url = `https://blogs.simotoivanen.fi/blog/${blog._id}`
 
       res.send(`
       <!DOCTYPE html>
