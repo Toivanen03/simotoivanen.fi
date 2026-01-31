@@ -12,10 +12,9 @@ import User from './models/User.js'
 import Blog from './models/Blog.js'
 import { passwordResetRoutes } from './routes/passwordReset.js'
 import { blogNotificationRouter } from './routes/blogNotification.js'
-import { sitemapRouter } from './routes/sitemap.js'
 
 const isBot = ua =>
-  /facebookexternalhit|Facebot|LinkedInBot|Twitterbot|Slackbot|Discordbot|WhatsApp|Googlebot/i.test(ua)
+  /facebookexternalhit|Facebot|LinkedInBot|LinkedInBot\/[0-9.]+|Twitterbot|Slackbot|Discordbot|WhatsApp|Googlebot/i.test(ua)
 
 const esc = s =>
   String(s)
@@ -50,7 +49,6 @@ app.use(cors({
 }))
 
 app.use(express.json())
-app.use('/', sitemapRouter)
 app.use('/api', passwordResetRoutes)
 app.use('/api', blogNotificationRouter)
 
