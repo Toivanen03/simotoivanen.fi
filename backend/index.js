@@ -69,7 +69,7 @@ app.get('/blog/:id', async (req, res, next) => {
       const blog = await Blog.findById(req.params.id).lean()
       if (!blog) return res.status(404).end()
 
-      const descriptionSource = blog.subtitle || blog.content || ''
+      const descriptionSource = blog.content || ''
 
       const url = `https://blogs.simotoivanen.fi/blog/${blog._id}`
 
@@ -80,16 +80,16 @@ app.get('/blog/:id', async (req, res, next) => {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="twitter:card" content="summary_large_image" />
-        <title>${esc(blog.title)}</title>
+        <title>${esc(blog.subtitle)}</title>
         <link rel="canonical" href="${url}" />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content="${esc(blog.title)}" />
+        <meta property="og:title" content="${esc(blog.subtitle)}" />
         <meta property="og:description" content="${esc(trim(descriptionSource))}" />
         <meta property="og:image" content="https://simotoivanen.fi/img/blogImg.png" />
         <meta property="og:url" content="${url}" />
       </head>
       <body>
-        <h1>${esc(blog.title)}</h1>
+        <h1>${esc(blog.subtitle)}</h1>
       </body>
       </html>
       `)
