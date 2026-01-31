@@ -60,6 +60,38 @@ app.use((req, res, next) => {
     next()
 })
 
+app.get('/', (req, res, next) => {
+  const ua = req.get('user-agent') || ''
+
+  if (!isBot(ua)) return next()
+
+  const url = 'https://simotoivanen.fi'
+  const title = 'Simo Toivanen - Ohjelmistokehittäjä. Projektini ja portfolioni. Tervetuloa!'
+  const description = 'Sivustoni esittelee ohjelmistokehittäjä Simo Toivasen projekteja ja osaamista. Rakennettu moderneilla web-teknologioilla kuten React, Apollo Client, GraphQL, Express, MongoDB ja Bootstrap.'
+
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="fi">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${esc(title)}</title>
+        <meta name="description" content="${esc(description)}" />
+        <meta property="og:title" content="${esc(title)}" />
+        <meta property="og:description" content="${esc(description)}" />
+        <meta property="og:image" content="https://simotoivanen.fi/img/simo.jpg" />
+        <meta property="og:url" content="${url}" />
+        <link rel="canonical" href="${url}" />
+      </head>
+      <body>
+        <h1>Simo Toivanen - Ohjelmistokehittäjä. Projektini ja portfolioni. Tervetuloa!</h1>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+      </body>
+    </html>
+  `)
+})
+
 app.get('/blog/:id', async (req, res, next) => {
   const ua = req.get('user-agent') || ''
 
@@ -88,7 +120,9 @@ app.get('/blog/:id', async (req, res, next) => {
         <meta property="og:image" content="https://simotoivanen.fi/img/blogImg.png" />
         <meta property="og:url" content="${url}" />
       </head>
-      <body></body>
+      <body>
+        <h1>${esc(blog.title)}</h1>
+      </body>
       </html>
       `)
   } catch (err) {
