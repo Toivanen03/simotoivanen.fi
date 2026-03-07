@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <link rel="canonical" href="https://simotoivanen.fi/old-exercises/Maisemanavigaattori/index.html">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maisemanavigaattori</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="description" content="Simo Toivanen - Maisemanavigaattori">
+    <meta property="og:title" content="Maisemanavigaattori">
+    <meta property="og:description" content="Sovellus on keskeneräinen, eikä sitä kehitetä aktiivisesti - ainakaan toistaiseksi.">
+    <meta property="og:image" content="/old-exercises/Maisemanavigaattori/images/naviCode.png">
+    <meta property="og:url" content="https://simotoivanen.fi/old-exercises/Maisemanavigaattori/index.html">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/@mapbox/polyline"></script>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="images/kompassi.png" type="image/x-icon">
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="panel">
+        <h3 id="devMode">Maisemanavigaattori</h3>
+    </div>
+
+    <div class="video-container hide" id="info">
+        <video src="./videos/tie.mp4" autoplay loop muted></video>
+        <p class="overlay-text">Maisemanavigaattori etsii reitin kiertoteiden kautta pääteiden sijaan.<br>
+            <br>Jos haluat vaihtaa lähtöpaikkaa, klikkaa ensin lähtöpaikan osoitekenttää ja valitse kohde kartalta. Valikko aukeaa suurennuslasikuvakkeesta.<br>
+            <br>Voit myös syöttää osoitteet kirjoittamalla. Käynnistä reittihaku lopuksi, kun molemmat kohteet on valittu.<br>
+            <br>Osa toiminnoista on vielä rakenteilla. Saat tämän ohjeen näkyviin<br>viereisen valikon <i>info-</i> kuvakkeesta milloin tahansa.<br><br>
+            <button class="btn btn-outline-dark m-1 close-button" onclick="document.getElementById('info').classList.add('hide')" style="background-color: lightgray;">Sulje</button>
+        </p>
+    </div>
+    
+    <div class="menu">
+        <nav>
+            <div id="login-icon" class="menu-item">
+                <img src="./images/login.png" alt="login-icon">
+            </div>
+            <div id="toggle-info" class="menu-item">
+                <img src="./images/info.png" alt="info">
+            </div>
+            <div id="search-route" class="menu-item">
+                <img src="./images/search.png" alt="search">
+            </div>
+            <div id="fullscreen-toggle" class="menu-item">
+                <img src="./images/full.png" alt="fullscreen">
+            </div>
+            <div class="current-location menu-item">
+                <img id="findMyLocation" src="./images/location.png" alt="current-location-icon" onclick="handlePermission('update')">
+            </div>
+            <div id="test-settings" class="menu-item">
+                <img id="routing-icon" src="./images/routing.webp" alt="routing-settings" onclick="routingOptions()">
+            </div>
+            <div id="settings" style="display: none;" class="menu-item">
+                <img src="./images/settings.png" alt="settings">
+            </div>
+        </nav>
+    </div>
+
+    <div id="login-form" class="hide">
+        <form id="login-form-element">
+            <h4>Kirjaudu</h4>
+            <input type="text" id="username" name="username" placeholder="admin" required>
+            <input type="password" id="password" name="password" placeholder="pass" required>
+            <button id="login" type="submit">Kirjaudu</button>
+            <span id="notification" ></span>
+        </form>
+    </div>
+
+    <div class="search hide">
+        <div class="search-top">
+         <h5> Reittivalinnat</h5>
+        <p id="removeRoutes">Tyhjennä</p>
+        </div>
+        <div>
+            <label for="startPoint">Lähtöpiste:</label>
+            <input type="text" id="startPoint" placeholder="Anna lähtöpiste">
+            <ul id="startSuggestionsList"></ul>
+        </div>
+        <div>
+            <label for="endPoint">Määränpää:</label>
+            <input type="text" id="endPoint" placeholder="Anna määränpää">
+            <ul id="endSuggestionsList"></ul>
+        </div>
+        <div>
+            <button id="findRoute">Etsi reitti</button>
+            <button id="navigateRoute"  style="display: none;" >Navigoi</button>
+            <div id="routeDistance"  style="display: none;">Matka: ? km</div>
+        </div>
+        <div class="maisema-selection">
+            <p id="toggle-maisema">Maisemareitti</p>
+            <label class="switch hide" id="maisema-switch"> 
+                <input type="checkbox" id="maisema-checkbox" checked>
+                <span class="slider"></span>
+            </label>
+            <span class="switchText hide" id="switch-text">Käytössä</span>
+        </div>
+    </div>
+    <div id="settings-menu" class="hide">
+        <span id="username-display" class="hide">Kirjautuneena: </span>
+        <ul id="settings-list"></ul>
+    </div>
+
+
+    <div id="map-container">
+        
+        <div id="map">
+            <div id="loading" style="display: none;">
+                <div class="loading-border">
+                    <video autoplay loop muted>
+                        <source src="./videos/tie.mp4" type="video/mp4">
+                        Selain ei tue videota.
+                    </video>
+                    <p class="loading-text" id="loading-text"></p>
+                </div>
+            </div>
+
+            <div id="startMenu">
+                <p>Valitse käytettävä tila:</p>
+                <button class="btn btn-outline-dark m-1" onclick="selectMode('development')">Kehittäjätila</button>
+                <button class="btn btn-outline-dark m-1" onclick="selectMode('staging')">Esiversio</button>
+            </div>
+
+            <div id="dataFiles"></div>
+
+            <div id="mode-box">
+                <p>Valitse reititystapa:</p>
+                <button class="btn btn-outline-dark m-1" onclick="selectRoutingMode('less_strict')">Joustava</button>
+                <button class="btn btn-outline-dark m-1" onclick="selectRoutingMode('strict')">Tiukka</button>
+            </div>
+
+            <script type="module" src="./javascript/main.js"></script>
+        
+
+        <div class="locationQueryBox" id="locationQueryBox">
+            <div class="locationQueryBox-text">
+                <p>Maisemanavigaattorin reittiopastustoiminto tarvitsee luvan sijainnin käyttöön.
+                Ilman sijaintitietoa vain reittihaku on käytössä.</p>
+                <p><b>Haluatko antaa luvan sijainnin käyttöön?</b></p>
+            </div>
+            <div class="locationQueryBox-buttons">
+                <button class="btn btn-outline-dark m-1" onclick="handlePermission(true)">Kyllä</button>
+                <button class="btn btn-outline-dark m-1" onclick="handlePermission(false)">Ei</button>
+            </div>
+        </div>
+
+        <div class="permissionDeniedBox" id="permissionDeniedBox">
+            <div class="permissionDeniedBox-text">
+                <p>Maisemanavigaattorin reittiopastustoiminto tarvitsee luvan sijainnin käyttöön.
+                Olet aiemmin kieltänyt sijainnin jakamisen.</p>
+                <p><b>Sijaintiluvat tulee nollata selaimen asetuksista.</b></p>
+                <a href="https://support.google.com/chrome/answer/142065?hl=fi&co=GENIE.Platform%3DDesktop&oco=0" target="_blank">Ohjeet asetusten nollaamiseen Chromessa</a>
+                <p style="margin-top: 10px;"><i>Brave-selaimella on tunnettuja ongelmia sijaintitiedon välittämisessä. Käytäthän muita selaimia, mikäli tarvitset sijaintia hyödyntäviä ominaisuuksia.</i></p>
+                <div class="permissionDeniedBox-buttons">
+                    <button onclick="history.back()" class="btn btn-outline-dark m-1">Palaa edelliselle sivulle</button>
+                    <button class="btn btn-outline-dark m-1" onclick="handlePermissionDenied(61.12, 25, 'close')">Sulje ikkuna</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="cookie-banner" class="cookie-banner">
+            <p>Maisemanavigaattorin osoitekäännöspalvelu käyttää kolmannen osapuolen evästeitä. 
+            Lue lisää <b>HERE Technologies'n </b><a href="https://legal.here.com/en-gb/privacy/cookie-policy">evästekäytännöistä.</a>.
+            </p>
+            <button id="accept-cookies" class="btn btn-outline-dark m-1">Hyväksy</button>
+            <button id="decline-cookies" class="btn btn-outline-dark m-1">Poistu sivulta</button>
+        </div>
+            <input type="hidden" id="startPointCoords">     <!-- Piilotetut tekstikentät, joihin koordinaatit tallentuvat asteina -->
+            <input type="hidden" id="endPointCoords">
+        </div>
+
+        <div id="markerMessage"></div>
+
+    </div>
+
+    <script type="module" src="./javascript/utils.js"></script>
+    <script type="module" src="./javascript/login.js"></script>
+
+</body>
+</html>
