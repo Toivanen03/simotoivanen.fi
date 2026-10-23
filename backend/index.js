@@ -4,7 +4,8 @@ import { fileURLToPath } from 'url'
 import { join, dirname } from 'path'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { ApolloServer } from 'apollo-server-express'
+import { ApolloServer } from '@apollo/server'
+import { expressMiddleware } from '@as-integrations/express4'
 import typeDefs from './schema/typeDefs.js'
 import resolvers from './schema/resolvers.js'
 import jwt from 'jsonwebtoken'
@@ -43,8 +44,14 @@ dotenv.config()
 
 const app = express()
 
+const isDev = process.env.NODE_ENV === 'development'
+
+const origins = isDev ?
+  ["http://localhost:5173", "http://192.168.1.141:5173"]
+  : ['https://blogs.simotoivanen.fi', 'https://lifeline.simotoivanen.fi', 'https://www.blogs.simotoivanen.fi', 'https://www.lifeline.simotoivanen.fi', 'https://simotoivanen.fi', 'https://www.simotoivanen.fi']
+
 app.use(cors({
-  origin: ['https://blogs.simotoivanen.fi', 'https://lifeline.simotoivanen.fi', 'https://www.blogs.simotoivanen.fi', 'https://www.lifeline.simotoivanen.fi', 'https://simotoivanen.fi', 'https://www.simotoivanen.fi'],
+  origin: origins,
   credentials: true
 }))
 
@@ -59,6 +66,37 @@ app.use((req, res, next) => {
     }
     next()
 })
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    cache: 'bounded'
+})
+
+await server.start()
+
+app.use('/graphql', expressMiddleware(server, {
+    context: async ({ req }) => {
+        const auth = req.headers.authorization
+
+        if (auth && auth.startsWith('Bearer ')) {
+            try {
+                const decodedToken = jwt.verify(
+                    auth.substring(7),
+                    process.env.JWT_SECRET
+                )
+
+                const currentUser = await User.findById(decodedToken.id)
+                return { currentUser }
+            } catch (err) {
+                console.error('Virhe:', err.message)
+                return {}
+            }
+        }
+
+        return {}
+    }
+}))
 
 app.get('/blog/:id', async (req, res, next) => {
   const ua = req.get('user-agent') || ''
@@ -152,31 +190,8 @@ app.get('*', async (req, res) => {
   res.sendFile(join(__dirname, 'build', 'index.html'))
 })
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  cache: "bounded",
-  context: async ({ req }) => {
-    const auth = req.headers.authorization
-    if (auth && auth.startsWith('Bearer ')) {
-      try {
-        const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
-        const currentUser = await User.findById(decodedToken.id)
-        return { currentUser }
-      } catch (err) {
-        console.error('Virhe:', err.message)
-        return {}
-      }
-    }
-    return {}
-  }
-})
-
 const PORT = process.env.PORT
 const MONGO_URI = process.env.MONGODB_URI
-
-await server.start()
-server.applyMiddleware({ app, path: '/graphql' })
 
 mongoose.connect(MONGO_URI)
   .then(() => {
